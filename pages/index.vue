@@ -22,7 +22,9 @@ const { data, error } = await useAsyncData(`index-${path}`, () => queryContent(p
 if (error.value)
   console.error(error.value)
 
-const config = useRuntimeConfig()
-const images = config.public.images
-console.log('images', images)
+const images = ref([])
+onMounted(async () => {
+  images.value = await fetch('/images/gallery.json').then(res => res.json())
+  console.log(images.value)
+})
 </script>

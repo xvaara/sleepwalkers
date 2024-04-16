@@ -24,6 +24,8 @@ export default eventHandler(async () => {
 })
 
 function parseIg(data: any): object {
+  if (!data || !data.data || !data.data.user || !data.data.user.edge_owner_to_timeline_media || !data.data.user.edge_owner_to_timeline_media.edges)
+    return []
   return data.data.user.edge_owner_to_timeline_media.edges.map((i: any) => ({
     id: i.node.id,
     url: `https://www.instagram.com/p/${i.node.shortcode}/`,

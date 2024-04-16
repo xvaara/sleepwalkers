@@ -1,12 +1,17 @@
-import { readdir } from 'node:fs/promises'
-
-async function getImages() {
-  const files = await readdir('public/images/gallery')
-  return files.filter(i => i.match(/\.(jpeg|jpg|gif|png)/) !== null).map(i => `/images/gallery/${i}`)
-}
+import { readdir, writeFile } from 'node:fs/promises'
+import path from 'node:path'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  hooks: {
+    'build:before': async (nuxt) => {
+      console.log('Building gallery json...')
+      const files = await readdir('public/images/gallery')
+      const images = files.filter(i => i.match(/\.(jpeg|jpg|gif|png)/) !== null).map(i => `/images/gallery/${i}`)
+      const target = path.join('public', 'images/gallery.json')
+      await writeFile(target, JSON.stringify(images, null, 2))
+    },
+  },
   app: {
     head: {
       charset: 'utf-8',
@@ -45,8 +50,8 @@ export default defineNuxtConfig({
     publicAssets: [
       {
         baseURL: 'images',
-        dir: 'public/images',
-        maxAge: 60 * 60 * 24 * 31, // 31 days
+        dir: path.join(__dirname, `public/images`),
+        // maxAge: 60 * 60 * 24 * 31, // 31 days
       },
     ],
   },
@@ -87,15 +92,11 @@ export default defineNuxtConfig({
   // },
   content: {
     highlight: false,
+
   },
   features: {
     inlineStyles: false,
   },
   // ssr: false,
   // target: 'static',
-  runtimeConfig: {
-    public: {
-      images: getImages(),
-    },
-  },
 })

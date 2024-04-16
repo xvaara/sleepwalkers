@@ -30,7 +30,7 @@ const { locale } = useI18n()
 const computedData = computed(() => {
   if (!data.value)
     return []
-  console.log('data', data.value)
+  // console.log('data', data.value)
   return data.value.map((item) => {
     return {
       ...item,

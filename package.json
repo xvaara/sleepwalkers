@@ -11,10 +11,9 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.5.0",
-    "@nuxthub/core": "^0.5.1",
+    "@nuxthub/core": "^0.5.5",
     "bootstrap-vue-next": "^0.16.6",
-    "nuxt": "^3.11.2",
-    "vue": "3.4.21"
+    "vue": "3.4.23"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.3",
@@ -25,10 +24,11 @@
     "@nuxtjs/sitemap": "^5.1.4",
     "@vueuse/core": "^10.9.0",
     "bootstrap-styles": "^5.3.3",
-    "eslint": "^8.50.0",
+    "eslint": "^8.57.0",
+    "nuxt": "^3.11.2",
     "nuxt-simple-robots": "4.0.0-rc.16",
-    "sass": "^1.74.1",
+    "sass": "^1.75.0",
     "unplugin-icons": "^0.18.5",
-    "wrangler": "^3.49.0"
+    "wrangler": "^3.50.0"
   }
 }
