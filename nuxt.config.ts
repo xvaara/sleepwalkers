@@ -37,6 +37,10 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       autoSubfolderIndex: false,
+      // crawlLinks: true,
+      // routes: [
+      //   '/',
+      // ],
     },
     publicAssets: [
       {
@@ -49,14 +53,6 @@ export default defineNuxtConfig({
   hub: {
     database: true,
   },
-  // nitro: {
-  //   prerender: {
-  //     crawlLinks: true,
-  //     routes: [
-  //       '/',
-  //     ],
-  //   },
-  // },
   devtools: { enabled: true },
   modules: [
     '@nuxt/content',
@@ -84,11 +80,11 @@ export default defineNuxtConfig({
       redirectOn: 'root', // recommended
     },
   },
-  routeRules: {
-    '/': { prerender: false },
-    '/fi': { prerender: true },
-    '/en': { prerender: true },
-  },
+  // routeRules: {
+  //   '/': { prerender: false },
+  //   '/fi': { prerender: true },
+  //   '/en': { prerender: true },
+  // },
   content: {
     highlight: false,
   },
@@ -96,7 +92,7 @@ export default defineNuxtConfig({
     inlineStyles: false,
   },
   // ssr: false,
-  target: 'static',
+  // target: 'static',
   runtimeConfig: {
     public: {
       images: getImages(),
