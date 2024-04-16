@@ -38,6 +38,13 @@ export default defineNuxtConfig({
     prerender: {
       autoSubfolderIndex: false,
     },
+    publicAssets: [
+      {
+        baseURL: 'images',
+        dir: 'public/images',
+        maxAge: 60 * 60 * 24 * 31, // 31 days
+      },
+    ],
   },
   hub: {
     database: true,
