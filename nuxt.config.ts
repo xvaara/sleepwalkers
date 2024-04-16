@@ -69,6 +69,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxthub/core',
     '@vueuse/nuxt',
+    '@nuxthq/studio',
   ],
   css: ['~/assets/bootstrap.scss'],
   i18n: {
