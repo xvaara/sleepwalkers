@@ -97,6 +97,6 @@ export default defineNuxtConfig({
   features: {
     inlineStyles: false,
   },
-  // ssr: false,
+  ssr: true,
   // target: 'static',
 })
