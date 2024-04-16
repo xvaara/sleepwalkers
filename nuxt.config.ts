@@ -59,7 +59,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-simple-robots',
     '@nuxtjs/sitemap',
-    'nuxt-og-image',
     '@nuxthub/core',
     '@vueuse/nuxt',
   ],
