@@ -1,6 +1,13 @@
 <template>
   <div>
-    <img alt="Sleepwalkers" src="/images/sleepwalkers.png" class="img-fluid rounded my-3">
+    <BCarousel id="front-carousel" controls indicators ride="carousel">
+      <BCarouselSlide
+        v-for="image in images"
+        :key="image"
+        class="ratio ratio-16x9"
+        :img-src="image"
+      />
+    </BCarousel>
 
     <ContentRenderer v-if="data" :value="data">
       <template #empty>
@@ -22,9 +29,15 @@ const { data, error } = await useAsyncData(`index-${path}`, () => queryContent(p
 if (error.value)
   console.error(error.value)
 
-const images = ref([])
+const images = ref(['/images/sleepwalkers.png'])
 onMounted(async () => {
-  images.value = await fetch('/images/gallery.json').then(res => res.json())
-  console.log(images.value)
+  const newImage = await fetch('/images/gallery.json').then(res => res.json())
+  images.value = [images.value[0], ...newImage]
 })
 </script>
+
+<style>
+.ratio img {
+  object-fit: cover;
+}
+</style>

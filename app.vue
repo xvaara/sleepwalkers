@@ -35,7 +35,11 @@ useHead({
     },
     {
       property: 'og:image',
-      content: '/images/sleepwalkers-logo.png',
+      content: '/images/sleepwalkers-small.png',
+    },
+    {
+      property: 'icon',
+      content: '/icon.png',
     },
   ],
 })

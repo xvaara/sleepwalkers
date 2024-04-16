@@ -12,8 +12,8 @@ dependencies:
     specifier: ^0.5.5
     version: 0.5.5(nuxt@3.11.2)(rollup@4.14.3)(vite@5.2.9)
   bootstrap-vue-next:
-    specifier: ^0.16.6
-    version: 0.16.6(vue@3.4.23)
+    specifier: ^0.17.0
+    version: 0.17.0(vue@3.4.23)
   vue:
     specifier: 3.4.23
     version: 3.4.23(typescript@5.4.5)
@@ -23,8 +23,8 @@ devDependencies:
     specifier: ^2.13.3
     version: 2.13.3(@vue/compiler-sfc@3.4.23)(eslint@8.57.0)(typescript@5.4.5)
   '@bootstrap-vue-next/nuxt':
-    specifier: ^0.16.6
-    version: 0.16.6(bootstrap-vue-next@0.16.6)(rollup@4.14.3)
+    specifier: ^0.17.0
+    version: 0.17.0(bootstrap-vue-next@0.17.0)(rollup@4.14.3)
   '@iconify-json/bi':
     specifier: ^1.1.23
     version: 1.1.23
@@ -506,13 +506,13 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  /@bootstrap-vue-next/nuxt@0.16.6(bootstrap-vue-next@0.16.6)(rollup@4.14.3):
-    resolution: {integrity: sha512-8mCGf11DPsl9/2Z2qADPkeNR5B4PB6tTwb3s5d8msm5+a30OfCOjif66LDDT9NNfe/kuh0j9DTyD5osMIWrWOQ==}
+  /@bootstrap-vue-next/nuxt@0.17.0(bootstrap-vue-next@0.17.0)(rollup@4.14.3):
+    resolution: {integrity: sha512-JYqRzCTYYHy4nM9OMSg2EjBdOXBSZ0NGd+pf9YpSD50r5miBX0gFz+KysQdFxXN/7B7nnC4SeTZK29gn4oUliw==}
     peerDependencies:
-      bootstrap-vue-next: ^0.16.6
+      bootstrap-vue-next: ^0.17.0
     dependencies:
       '@nuxt/kit': 3.11.2(rollup@4.14.3)
-      bootstrap-vue-next: 0.16.6(vue@3.4.23)
+      bootstrap-vue-next: 0.17.0(vue@3.4.23)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -4378,10 +4378,10 @@ packages:
     resolution: {integrity: sha512-czHcG+IHFdqjBkKy8/OH+VB2/bLJmT/y0zZSYHbTQpx1Th7pHuURo72B4Xbtrg4Y4rO/9rPCLOYmVLq5HvWlZw==}
     dev: true
 
-  /bootstrap-vue-next@0.16.6(vue@3.4.23):
-    resolution: {integrity: sha512-CDjq3KgIOALJO/Zvmcgxqavv1NznFROUl7yWHAmp4T4R8IRJLfyMj1zizjw2OzCvQ+uJ9PZ28T1Cx7xq8+m2xg==}
+  /bootstrap-vue-next@0.17.0(vue@3.4.23):
+    resolution: {integrity: sha512-mTRGzQucLOHZG+XbsCcNpMq0y2GI2sGZA3VDIg+yfHoCWGeSa/VghM29MCTSNkjz0vc9OsGMDmQqq8tIhhXjNQ==}
     peerDependencies:
-      vue: ^3.4.18
+      vue: ^3.4.21
     dependencies:
       '@floating-ui/vue': 1.0.6(vue@3.4.23)
       '@vueuse/core': 10.9.0(vue@3.4.23)
