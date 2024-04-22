@@ -7,10 +7,7 @@ Tervetuloa harrastamaan seurassamme ultimate!
 
 ## Yhteystiedot
 
-- **Sähköposti**: [info@sleepwalkers.fi](mailto:info@sleepwalkers.fi)
-- **Facebook**: [Sleepwalkers ultimate](https://www.facebook.com/sleepwalkersultimate)
-- **Instagram**: [sleepwalkers ultimate](https://www.instagram.com/sleepwalkersultimate/)
-- **Toiminnanjohtaja**: Ilari Nurmela [+358 40 7345892](tel:+358407345892)
+:Contact
 
 ::card{ .mb-3}
   ::a{ href="https://jklsummerstart.com" .text-decoration-none .text-body}

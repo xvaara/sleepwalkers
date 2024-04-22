@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BCarousel id="front-carousel" controls indicators ride="carousel">
+    <BCarousel id="front-carousel" controls indicators ride="carousel" class="rounded">
       <BCarouselSlide
         v-for="image in images"
         :key="image"
@@ -14,8 +14,15 @@
         <p>No content found.</p>
       </template>
     </ContentRenderer>
+
+    <div class="w-100">
+      <h3>{{ $t('Seuraavat harjoitukset') }}</h3>
+      <Practices
+        class="row" item-class="col-12 col-lg-6"
+      />
+    </div>
     <div class="row">
-      <BlogList :limit="4" class="col-12 col-md-12" />
+      <BlogList :limit="4" class="col-12 col-lg-6" />
     </div>
     <ClientOnly>
       <Instagram />
@@ -39,5 +46,8 @@ onMounted(async () => {
 <style>
 .ratio img {
   object-fit: cover;
+}
+.carousel.rounded > .carousel-inner {
+  border-radius: var(--bs-border-radius) !important;
 }
 </style>

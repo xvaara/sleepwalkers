@@ -1,19 +1,22 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between">
-      <NuxtLink :to="prev?._path">
-        <ChevronLeft />{{ $t('Edellinen') }}
-      </NuxtLink>
-      <NuxtLink :to="localePath('/blog')">
-        <ChevronUp />{{ $t('Takaisin') }}
-      </NuxtLink>
-      <NuxtLink :to="next?._path">
-        {{ $t('Seuraava') }}<ChevronRight />
-      </NuxtLink>
+    <div class="card p-1 mb-3 shadow">
+      <div class="d-flex justify-content-between align-items-end">
+        <NuxtLink :to="prev?._path">
+          <ChevronLeft />{{ $t('Edellinen') }}
+        </NuxtLink>
+        <NuxtLink :to="localePath('/blog')" class="text-center">
+          <ChevronUp /><br>
+          {{ $t('Takaisin') }}
+        </NuxtLink>
+        <NuxtLink :to="next?._path">
+          {{ $t('Seuraava') }}<ChevronRight />
+        </NuxtLink>
+      </div>
     </div>
     <h2>{{ data.title }}</h2>
     <p>{{ new Date(data.date).toLocaleDateString(locale) }}</p>
-    <BlogImage :src="data.image" />
+    <BlogImage v-if="showDefaultImage" :src="data.image" />
     <div>
       <ContentRenderer v-if="postData" :value="postData">
         <template #empty>
@@ -54,6 +57,8 @@ if (error.value)
 const data = computed<BlogPost>(() => {
   return makeBLogPost(postData)
 })
+
+const showDefaultImage = computed(() => !JSON.stringify(postData.value?.body).includes(postData.value?.image))
 
 useHead({
   title: data.value.title || '',

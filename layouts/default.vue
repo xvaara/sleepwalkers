@@ -1,6 +1,47 @@
 <template>
   <div>
-    <BNavbar v-b-color-mode="'dark'" variant="primary" sticky="top" toggleable="lg" :container="true" style="--bs-navbar-padding-y: 0;">
+    <DefineTemplate>
+      <div
+        v-b-color-mode="'dark'"
+        class="d-flex gap-2 flex-wrap socials ms-auto"
+        :style="{
+          '--bs-link-color': 'var(--white)',
+        }"
+      >
+        <BNav class="d-flex">
+          <BNavItem
+            :to="computedSwitchLocalePath.to"
+            class="py-1"
+            active-class="active fw-bold"
+          >
+            {{ computedSwitchLocalePath.label }}
+          </BNavItem>
+          <BNavItem
+            v-for="link in headerExternalLinks"
+            :key="link.label"
+            :href="link.url"
+            :link-attrs="{ 'aria-label': link.label }"
+            target="_blank"
+            rel="noopener"
+            link-classes="py-1 px-0"
+          >
+            <component :is="link.icon()" height="1.1rem" aria-hidden />
+          </BNavItem>
+          <div class="border spacer align-self-center border-secondary ms-2 me-3" />
+          <ClientOnly>
+            <BNavItemDropdown toggle-class="px-0">
+              <template #button-content>
+                <component :is="currentIcon" height="1.1rem" :aria-label="`Toggle theme (${dark})`" />
+              </template>
+              <BDropdownItem v-for="el in options" :key="el" :active="dark === el" @click="set(el)">
+                <component :is="map[el]" /> {{ el }}
+              </BDropdownItem>
+            </BNavItemDropdown>
+          </ClientOnly>
+        </BNav>
+      </div>
+    </DefineTemplate>
+    <BNavbar v-b-color-mode="'dark'" class="shadow" variant="primary" sticky="top" toggleable="lg" :container="true" style="--bs-navbar-padding-y: 0;">
       <div class="d-flex gap-2 align-items-center nav">
         <BNavbarToggle v-b-toggle.sidebar-menu class="my-1" />
         <BNavbarBrand :to="localePath('/')" class="p-0 m-auto">
@@ -8,77 +49,51 @@
         </BNavbarBrand>
         <div class="border spacer border-secondary ms-3 me-0" />
       </div>
-      <DefineTemplate>
-        <div class="d-flex gap-2 flex-wrap socials ms-auto">
-          <BNav class="d-flex">
+
+      <ReuseTemplate class="d-none d-lg-block" />
+    </BNavbar>
+    <BContainer fluid class="container-lg bd-layout">
+      <aside class="bd-sidebar">
+        <BOffcanvas
+          id="sidebar-menu"
+          v-model="sidebar"
+          :teleport-disabled="true"
+          :backdrop="false"
+          class="h-100 border-0"
+          :body-scrolling="isLargeScreen"
+          header-class="bg-primary py-0"
+        >
+          <template #header="{ hide }">
+            <div v-b-color-mode="'dark'" class="d-flex align-items-center w-100">
+              <div class="d-block d-lg-none">
+                <ReuseTemplate />
+              </div>
+              <BCloseButton
+                class="ms-auto"
+
+                aria-label="close"
+                @click="hide('close')"
+              />
+            </div>
+          </template>
+          <BNav vertical class="shadow rounded mb-3">
             <BNavItem
-              v-for="link in locales.filter((locale) => locale.id !== $i18n.locale)"
-              :key="link.id"
-              xxxto="link.route"
-              :to="switchLocalePath(link.id)"
+              v-for="link in navigationComputed"
+              :key="link.route"
+              :to="link.route"
               class="py-1"
               active-class="active fw-bold"
             >
               {{ link.label }}
             </BNavItem>
-            <BNavItem
-              v-for="link in headerExternalLinks"
-              :key="link.label"
-              :href="link.url"
-              :link-attrs="{ 'aria-label': link.label }"
-              target="_blank"
-              rel="noopener"
-              link-classes="py-1 px-0"
-            >
-              <component :is="link.icon()" height="1.1rem" aria-hidden />
-            </BNavItem>
-            <div class="border spacer align-self-center border-secondary ms-2 me-3" />
-            <ClientOnly>
-              <BNavItemDropdown toggle-class="px-0">
-                <template #button-content>
-                  <component :is="currentIcon" height="1.1rem" :aria-label="`Toggle theme (${dark})`" />
-                </template>
-                <BDropdownItem v-for="el in options" :key="el" :active="dark === el" @click="set(el)">
-                  <component :is="map[el]" /> {{ el }}
-                </BDropdownItem>
-              </BNavItemDropdown>
-            </ClientOnly>
           </BNav>
-        </div>
-      </DefineTemplate>
-      <ReuseTemplate v-if="!isSmallScreen" />
-    </BNavbar>
-    <BContainer fluid class="container-lg bd-layout">
-      <aside class="bd-sidebar">
-        <ClientOnly>
-          <BOffcanvas
-            id="sidebar-menu"
-            v-model="sidebar"
-            teleport-disabled="true"
-            :backdrop="false"
-            class="h-100 border-0 shadow"
-            :body-scrolling="isLargeScreen"
-          >
-            <template #title>
-              <div v-if="isSmallScreen" class="bg-primary text-white w-100 position-absolute top-0 left-0 negative-margin-offcanvas">
-                <ReuseTemplate />
-              </div>
-            </template>
-            <BNav vertical>
-              <BNavItem
-                v-for="link in navigationComputed"
-                :key="link.route"
-                :to="link.route"
-                class="py-1"
-                active-class="active fw-bold"
-              >
-                {{ link.label }}
-              </BNavItem>
+          <div class="shadow rounded">
+            <BNav>
               <BNavItem :to="localePath('/blog')">
                 {{ $t('Blogi') }}
               </BNavItem>
             </BNav>
-            <BListGroup class="shadow-sm">
+            <BListGroup class="pb-0 mb-3 rounded-top-0">
               <BListGroupItem
                 v-for="post in blogPosts"
                 :key="post._id"
@@ -89,12 +104,12 @@
                 </NuxtLink>
               </BListGroupItem>
             </BListGroup>
+          </div>
 
-            <Practices />
-          </BOffcanvas>
-        </ClientOnly>
+          <Practices small />
+        </BOffcanvas>
       </aside>
-      <main class="mt-3 my-md-4">
+      <main class="mt-3">
         <BContainer>
           <slot />
         </BContainer>
@@ -128,13 +143,17 @@ import SunFill from '~icons/bi/sun-fill'
 import CircleHalf from '~icons/bi/circle-half'
 
 const { locale, setLocale } = useI18n()
-
+const otherLocale = computed(() => (locale.value === 'fi' ? 'en' : 'fi'))
 const isLargeScreen = useMediaQuery('(min-width: 992px)')
-const isSmallScreen = useMediaQuery('(max-width: 768px)')
-const sidebar = ref(isLargeScreen.value)
-watch(isLargeScreen, (value) => {
-  sidebar.value = value
+const sidebar = ref(true)
+
+onMounted(() => {
+  sidebar.value = isLargeScreen.value
+  watch(isLargeScreen, (value) => {
+    sidebar.value = value
+  })
 })
+
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
 const { data: blogPosts } = await useAsyncData('home-blogposts', () => queryContent(`/${locale.value}/blog`).where({
@@ -152,7 +171,8 @@ const { data: blogPosts } = await useAsyncData('home-blogposts', () => queryCont
 // console.log(blogPosts)
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent(`/${locale.value}/`)), { watch: [locale] })
-// console.log(navigation)
+const { data: navigationOtherLocale } = await useAsyncData('navigationOtherLocale', () => fetchContentNavigation(queryContent(`/${otherLocale.value}/`)), { watch: [otherLocale] })
+console.log(navigationOtherLocale)
 const navigationComputed = computed(() => {
   if (!navigation.value?.[0].children)
     return []
@@ -163,6 +183,45 @@ const navigationComputed = computed(() => {
     }))
 })
 const switchLocalePath = useSwitchLocalePath()
+
+// const router = useRouter()
+const { data: otherBlogPosts } = await useAsyncData(`all-blogposts-${otherLocale.value}`, () => queryContent(otherLocale.value, 'blog').where({
+  $and: [
+    {
+      _file: {
+        $ne: '_dir.yml',
+      },
+    },
+    {
+      published: true,
+    },
+  ],
+}).find(), { watch: [otherLocale] })
+
+function hasLocaleSwitch(link: string) {
+  if (navigationOtherLocale.value?.[0]?._path === link)
+    return true
+  if (navigationOtherLocale.value?.[0]?.children?.some(i => i._path === link))
+    return true
+  if (link === `/${otherLocale.value}/blog`)
+    return true
+  if (link.includes('/blog')) {
+    if (otherBlogPosts.value?.some(i => i._path === link))
+      return true
+  }
+  return false
+}
+const computedSwitchLocalePath = computed(() => {
+  let link = switchLocalePath(otherLocale.value)
+
+  while (!hasLocaleSwitch(link) && link.includes('/') && link !== '/')
+    link = link.replace(/\/[^/]*$/, '')
+
+  return {
+    to: link,
+    label: locale.value === 'fi' ? 'English' : 'Suomi',
+  }
+})
 
 const localePath = useLocalePath()
 
@@ -250,9 +309,9 @@ function set(newValue: keyof typeof map) {
   // Navbar.
   > .navbar {
     color: var(--white);
-    box-shadow:
-      0 0.5rem 1rem rgba(0, 0, 0, 0.15),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    // box-shadow:
+    //   0 0.5rem 1rem rgba(0, 0, 0, 0.15),
+    //   inset 0 -1px 0 rgba(255, 255, 255, 0.15);
 
     .nav-link,
     .navbar-brand,
@@ -269,13 +328,28 @@ function set(newValue: keyof typeof map) {
 
   // Sidebar.
   .offcanvas {
-    box-shadow:
-      0 0.5rem 1rem rgba(0, 0, 0, 0.15),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    .offcanvas-header{
+      color: var(--white);
+      button.btn-close {
+        --bs-btn-close-color: var(--white);
+        color: var(--white) !important;
+      }
+    }
+    box-shadow: none;
+    // box-shadow:
+    //   0 0.5rem 1rem rgba(0, 0, 0, 0.15),
+    //   inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+
     .list-group {
+      border: none;
       padding: 0 0 1.5rem 0;
       font-size: 0.875em;
       .list-group-item {
+        border-left: none;
+        border-right: none;
+        &:last-child {
+          border-bottom: none;
+        }
 
         padding: 0.3em 0.5em;
 
@@ -303,7 +377,7 @@ function set(newValue: keyof typeof map) {
       grid-area: sidebar;
       position: -webkit-sticky;
       position: sticky;
-      top: 5rem;
+      top: 3rem;
       display: block !important;
       height: calc(100vh - 3rem);
       padding-left: 0.25rem;
@@ -330,13 +404,13 @@ function set(newValue: keyof typeof map) {
 .bd-sidebar,
 .otp-sidebar {
   @media (min-width: 992px) {
-    min-width: 14rem;
+    min-width: 15rem;
   }
 
   .offcanvas.offcanvas-start,
   .offcanvas.offcanvas-end {
     @media (min-width: 992px) {
-      width: 14rem !important;
+      width: 15rem !important;
     }
 
     @media (max-width: 991px) {
