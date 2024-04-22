@@ -171,8 +171,8 @@ const { data: blogPosts } = await useAsyncData('home-blogposts', () => queryCont
 // console.log(blogPosts)
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent(`/${locale.value}/`)), { watch: [locale] })
-const { data: navigationOtherLocale } = await useAsyncData('navigationOtherLocale', () => fetchContentNavigation(queryContent(`/${otherLocale.value}/`)), { watch: [otherLocale] })
-console.log(navigationOtherLocale)
+const { data: navigationOtherLocale } = await useAsyncData('navigationOtherLocale', () => fetchContentNavigation(queryContent(`/${otherLocale.value}/`)), { watch: [locale] })
+
 const navigationComputed = computed(() => {
   if (!navigation.value?.[0].children)
     return []
@@ -182,7 +182,7 @@ const navigationComputed = computed(() => {
       route: i._path,
     }))
 })
-const switchLocalePath = useSwitchLocalePath()
+// const switchLocalePath = useSwitchLocalePath()
 
 // const router = useRouter()
 const { data: otherBlogPosts } = await useAsyncData(`all-blogposts-${otherLocale.value}`, () => queryContent(otherLocale.value, 'blog').where({
@@ -196,7 +196,7 @@ const { data: otherBlogPosts } = await useAsyncData(`all-blogposts-${otherLocale
       published: true,
     },
   ],
-}).find(), { watch: [otherLocale] })
+}).find(), { watch: [locale] })
 
 function hasLocaleSwitch(link: string) {
   if (navigationOtherLocale.value?.[0]?._path === link)
@@ -211,8 +211,13 @@ function hasLocaleSwitch(link: string) {
   }
   return false
 }
+
+const route = useNuxtApp().$router.currentRoute
 const computedSwitchLocalePath = computed(() => {
-  let link = switchLocalePath(otherLocale.value)
+  // let link = switchLocalePath(otherLocale.value)
+  // let link = ''
+  let link = route.value.path
+  link = link.replace(new RegExp(`^/${locale.value}`), `/${otherLocale.value}`)
 
   while (!hasLocaleSwitch(link) && link.includes('/') && link !== '/')
     link = link.replace(/\/[^/]*$/, '')
@@ -223,7 +228,10 @@ const computedSwitchLocalePath = computed(() => {
   }
 })
 
-const localePath = useLocalePath()
+// const localePath = useLocalePath()
+function localePath(path: string) {
+  return `/${locale.value}${path.startsWith('/') ? path : `/${path}`}`
+}
 
 // const route = useRoute()
 

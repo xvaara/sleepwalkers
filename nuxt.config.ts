@@ -3,6 +3,9 @@ import path from 'node:path'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    resetSecret: '',
+  },
   hooks: {
     'build:before': async (nuxt) => {
       console.log('Building gallery json...')
@@ -58,7 +61,7 @@ export default defineNuxtConfig({
   hub: {
     database: true,
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     '@nuxt/content',
     '@bootstrap-vue-next/nuxt',

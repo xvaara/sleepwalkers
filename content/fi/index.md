@@ -7,10 +7,10 @@ Tervetuloa harrastamaan seurassamme ultimate!
 
 ## Yhteystiedot
 
-:Contact
+:contacts
 
-::card{ .mb-3}
-  ::a{ href="https://jklsummerstart.com" .text-decoration-none .text-body}
+::a{ href="https://jklsummerstart.com" .text-decoration-none .text-body}
+  ::card{ .mb-3}
     :::row
       ::::column{ .col-12 .col-md-6 }
         <img src="/images/jss-logo.png" class="img-fluid" />

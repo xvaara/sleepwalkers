@@ -1,11 +1,21 @@
-export default eventHandler(async () => {
+import { get } from 'bootstrap-vue-next/src/utils/object.js'
+
+export default eventHandler(async (event) => {
+  appendResponseHeaders(event, {
+    'cache-control': 'max-age=3600, s-maxage=3600, must-revalidate',
+  })
   const db = hubDatabase()
   const results = await db.prepare('SELECT data from documents where id = "practices" and updated_at > datetime("now", "-1 day");').first()
   // console.log('results', results)
   if (results?.data)
     return JSON.parse(results.data as string)
 
-  const data = await fetch('https://jsw.nimenhuuto.com/calendar/csv').then(res => res.text()).then((data) => {
+  const data = await getPracticesData(db)
+  return data
+})
+
+export async function getPracticesData(db: Database): Promise<object> {
+  return fetch('https://jsw.nimenhuuto.com/calendar/csv').then(res => res.text()).then((data) => {
     const doc = parseCSV(data)
       .slice(1)
       .map(i => ({
@@ -19,8 +29,7 @@ export default eventHandler(async () => {
     db.prepare('INSERT OR REPLACE INTO documents (id, data, updated_at) VALUES ("practices", ?, current_timestamp)').bind(JSON.stringify(doc)).run()
     return doc
   })
-  return data
-})
+}
 
 function parseCSV(str: string): string[][] {
   const arr: string[][] = []

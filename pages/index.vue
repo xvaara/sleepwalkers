@@ -9,10 +9,8 @@
       />
     </BCarousel>
 
-    <ContentRenderer v-if="data" :value="data">
-      <template #empty>
-        <p>No content found.</p>
-      </template>
+    <ContentRenderer :value="data">
+      <template #empty />
     </ContentRenderer>
 
     <div class="w-100">
