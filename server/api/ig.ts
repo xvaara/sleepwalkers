@@ -21,9 +21,17 @@ export async function getIgData(db: Database): Promise<object> {
       'Referrer-Policy': 'strict-origin-when-cross-origin',
     },
   })
-    .then(res => res.json())
+    .then(res => res.text())
     .then((data) => {
       // console.log('data', data)
+      let json
+      try {
+        json = JSON.parse(data)
+      }
+      catch (e) {
+        console.error('Error parsing JSON', e)
+        return { error: 'Error parsing JSON', data }
+      }
 
       db.prepare('INSERT OR REPLACE INTO documents (id, data, updated_at) VALUES ("instagram", ?, current_timestamp)').bind(JSON.stringify(data)).run()
       return data
