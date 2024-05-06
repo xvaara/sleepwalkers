@@ -15,7 +15,7 @@ export default eventHandler(async (event) => {
 export async function getIgData(db: Database): Promise<object> {
   return fetch('https://i.instagram.com/api/v1/users/web_profile_info/?username=sleepwalkersultimate', {
     headers: {
-      'accept': '*/*',
+      'accept': 'text/json',
       'x-ig-app-id': '936619743392459',
       'Referer': 'https://www.instagram.com/',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
