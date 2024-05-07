@@ -15,15 +15,20 @@ export default defineNuxtConfig({
       const images = files.filter(i => i.match(/\.(jpeg|jpg|gif|png)/) !== null).map(i => `/images/gallery/${i}`)
       const target = path.join('public', 'images/gallery.json')
       await writeFile(target, JSON.stringify(images, null, 2))
-      console.log('get ig...')
-      const ig = await getIgData()
-      if (ig.error)
-        console.error('Error getting ig data', ig.error)
-      else
-        await writeFile(path.join('public', 'ig.json'), JSON.stringify(ig, null, 2))
-      console.log('get practices...')
-      const practices = await getPracticesData()
-      await writeFile(path.join('public', 'practices.json'), JSON.stringify(practices, null, 2))
+      try {
+        console.log('get ig...')
+        const ig = await getIgData()
+        if (ig.error)
+          console.error('Error getting ig data', ig.error)
+        else
+          await writeFile(path.join('public', 'ig.json'), JSON.stringify(ig, null, 2))
+        console.log('get practices...')
+        const practices = await getPracticesData()
+        await writeFile(path.join('public', 'practices.json'), JSON.stringify(practices, null, 2))
+      }
+      catch (e) {
+        console.error('Error getting data', e)
+      }
     },
   },
   app: {
