@@ -39,7 +39,7 @@ const props = defineProps({
   },
 })
 // const { data } = useFetch('https://test.mhx.fi/sleepwalkers/calendar/csv?'+new Date().getDate())
-const { data } = useFetch('/api/practices', {})
+const { data } = useFetch('/practices.json', {})
 // console.log(data.value)
 const { locale } = useI18n()
 const limit = new Date()

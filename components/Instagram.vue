@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-const { data } = useFetch('/api/ig')
+const { data } = useFetch('/ig.json')
 
 onMounted(() => {
   nextTick(() => {

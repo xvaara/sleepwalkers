@@ -1,5 +1,7 @@
 import { readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { getIgData } from './utils/ig'
+import { getPracticesData } from './utils/practices'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -13,6 +15,12 @@ export default defineNuxtConfig({
       const images = files.filter(i => i.match(/\.(jpeg|jpg|gif|png)/) !== null).map(i => `/images/gallery/${i}`)
       const target = path.join('public', 'images/gallery.json')
       await writeFile(target, JSON.stringify(images, null, 2))
+      console.log('get ig...')
+      const ig = await getIgData()
+      await writeFile(path.join('public', 'ig.json'), JSON.stringify(ig, null, 2))
+      console.log('get practices...')
+      const practices = await getPracticesData()
+      await writeFile(path.join('public', 'practices.json'), JSON.stringify(practices, null, 2))
     },
   },
   app: {
@@ -70,9 +78,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-simple-robots',
     '@nuxtjs/sitemap',
-    '@nuxthub/core',
     '@vueuse/nuxt',
-    '@nuxthq/studio',
   ],
   css: ['~/assets/bootstrap.scss'],
   i18n: {
