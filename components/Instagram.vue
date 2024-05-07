@@ -6,7 +6,8 @@
 
 <script setup>
 const url = useRequestURL()
-const { data } = useFetch(`${url.protocol}//${url.host}/ig.json`)
+const { data } = useAsyncData('ig.json', () => $fetch(`${url.protocol}//${url.host}/data/ig.json`))
+// const { data } = useFetch(`${url.protocol}//${url.host}/data/ig.json`)
 // const { data } = useFetch(`/ig.json`)
 
 onMounted(() => {

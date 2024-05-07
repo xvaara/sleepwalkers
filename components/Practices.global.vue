@@ -40,7 +40,7 @@ const props = defineProps({
 })
 // const { data } = useFetch('https://test.mhx.fi/sleepwalkers/calendar/csv?'+new Date().getDate())
 const url = useRequestURL()
-const { data } = useFetch(`${url.protocol}//${url.host}/practices.json`)
+const { data } = useAsyncData('practices.json', () => $fetch(`${url.protocol}//${url.host}/data/practices.json`))
 // console.log(data.value)
 const { locale } = useI18n()
 const limit = new Date()

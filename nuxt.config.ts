@@ -21,10 +21,10 @@ export default defineNuxtConfig({
         if (ig.error)
           console.error('Error getting ig data', ig.error)
         else
-          await writeFile(path.join('public', 'ig.json'), JSON.stringify(ig, null, 2))
+          await writeFile(path.join('public', 'data', 'ig.json'), JSON.stringify(ig, null, 2))
         console.log('get practices...')
         const practices = await getPracticesData()
-        await writeFile(path.join('public', 'practices.json'), JSON.stringify(practices, null, 2))
+        await writeFile(path.join('public', 'data', 'practices.json'), JSON.stringify(practices, null, 2))
       }
       catch (e) {
         console.error('Error getting data', e)
@@ -70,6 +70,16 @@ export default defineNuxtConfig({
       {
         baseURL: 'images',
         dir: path.join(__dirname, `public/images`),
+        // maxAge: 60 * 60 * 24 * 31, // 31 days
+      },
+      {
+        baseURL: 'data',
+        dir: path.join(__dirname, `public/data`),
+        // maxAge: 60 * 60 * 24 * 31, // 31 days
+      },
+      {
+        baseURL: 'files',
+        dir: path.join(__dirname, `public/files`),
         // maxAge: 60 * 60 * 24 * 31, // 31 days
       },
 
