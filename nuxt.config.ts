@@ -17,7 +17,10 @@ export default defineNuxtConfig({
       await writeFile(target, JSON.stringify(images, null, 2))
       console.log('get ig...')
       const ig = await getIgData()
-      await writeFile(path.join('public', 'ig.json'), JSON.stringify(ig, null, 2))
+      if (ig.error)
+        console.error('Error getting ig data', ig.error)
+      else
+        await writeFile(path.join('public', 'ig.json'), JSON.stringify(ig, null, 2))
       console.log('get practices...')
       const practices = await getPracticesData()
       await writeFile(path.join('public', 'practices.json'), JSON.stringify(practices, null, 2))
@@ -64,6 +67,7 @@ export default defineNuxtConfig({
         dir: path.join(__dirname, `public/images`),
         // maxAge: 60 * 60 * 24 * 31, // 31 days
       },
+
     ],
   },
   hub: {
