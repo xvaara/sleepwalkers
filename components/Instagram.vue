@@ -5,7 +5,9 @@
 </template>
 
 <script setup>
-const { data } = useFetch('https://sleepwalkers.pages.dev/ig.json')
+const url = useRequestURL()
+const { data } = useFetch(`${url.protocol}//${url.host}/ig.json`)
+// const { data } = useFetch(`/ig.json`)
 
 onMounted(() => {
   nextTick(() => {
