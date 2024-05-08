@@ -5,8 +5,11 @@
 </template>
 
 <script setup>
-const url = useRequestURL()
-const { data } = useAsyncData('ig.json', () => $fetch(`${url.protocol}//${url.host}/data/ig.json`))
+import igdata from '../public/data/ig.json'
+
+const data = ref(igdata)
+// const url = useRequestURL()
+// const { data } = useAsyncData('ig.json', () => $fetch(`${url.protocol}//${url.host}/data/ig.json`))
 // const { data } = useFetch(`${url.protocol}//${url.host}/data/ig.json`)
 // const { data } = useFetch(`/ig.json`)
 

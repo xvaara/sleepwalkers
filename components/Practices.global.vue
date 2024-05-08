@@ -27,6 +27,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import pdata from '../public/data/practices.json'
 
 const props = defineProps({
   itemClass: {
@@ -38,9 +39,11 @@ const props = defineProps({
     default: false,
   },
 })
+
 // const { data } = useFetch('https://test.mhx.fi/sleepwalkers/calendar/csv?'+new Date().getDate())
-const url = useRequestURL()
-const { data } = useAsyncData('practices.json', () => $fetch(`${url.protocol}//${url.host}/data/practices.json`))
+const data = ref(pdata)
+// const url = useRequestURL()
+// const { data } = useAsyncData('practices.json', () => $fetch(`${url.protocol}//${url.host}/data/practices.json`))
 // console.log(data.value)
 const { locale } = useI18n()
 const limit = new Date()
