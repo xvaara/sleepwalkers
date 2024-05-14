@@ -58,6 +58,8 @@ const computedData = computed(() => {
       date: new Date(item.date),
     }
   }).filter((item) => {
+    return item.date > new Date()
+  }).filter((item) => {
     return item.date < limit
   }).sort((a, b) => {
     return a.date - b.date
