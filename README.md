@@ -4,6 +4,12 @@ Sivut käyttävät nuxt content modulia, joka mahdollistaa sivujen sisällön ki
 
 [Content documentation](https://content.nuxt.com/) ohjeet content moduliin.
 
+## Sivujen muokkaaminen
+
+muokkaa `content` kansiosta löytyviä markdown tiedostoja. Sivut päivittyvät automaattisesti kun muutokset on tehty ja pushattu githubiin.
+
+Jos epäselvää, kysy Jukalta apua.
+
 ## Muokkas selaimessa
 
 - Tee github tunnus
