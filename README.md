@@ -1,42 +1,46 @@
-# Content v2 Minimal Starter
+# Sleepwalkers sivut
 
-Look at the [Content documentation](https://content.nuxt.com/) to learn more.
+Sivut käyttävät nuxt content modulia, joka mahdollistaa sivujen sisällön kirjoittamisen markdownilla. Sivut ovat staattisia ja ne hostataan cloudflare pages:issa. Muutokset julkaistaan automaattisesti jokaisen main branchiin tulleen commitin jälkeen.
 
-## Setup
+[Content documentation](https://content.nuxt.com/) ohjeet content moduliin.
 
-Make sure to install the dependencies:
+## Muokkas selaimessa
+
+- Tee github tunnus
+- Tee uusi pull request stackblitzin kautta: [new pull request](https://pr.new/xvaara/sleepwalkers)
+- Muokkaa sivuja ja tallenna muutokset
+- Tee pull request
+
+## Lokaali muokkaaminen
+
+- Tee github tunnus
+- Asenna git
+- Asenna node.js
+- Kloonaa tämä repository
+- Asenna riippuvuudet
+- Käynnistä kehitysserveri
+- Tee muutoksia ja puske ne githubiin
+
+## Kloonaa tämä repository
 
 ```bash
-# yarn
-yarn install
+git clone git@github.com:xvaara/sleepwalkers.git
+```
 
-# npm
-npm install
+Asenna riippuvuudet:
+
+```bash
+# asenna pnpm
+npm install -g pnpm
 
 # pnpm
 pnpm install
 ```
 
-## Development Server
+## Kehitys Server
 
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
+Käynnistä kehityspalvelin osoitteessa http://localhost:3000
 
 ```bash
-npm run build
+pnpm dev
 ```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
