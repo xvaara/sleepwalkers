@@ -78,12 +78,11 @@ export default defineNuxtConfig({
     strict: true,
   },
   nitro: {
+    preset: 'cloudflare_pages',
     prerender: {
       autoSubfolderIndex: false,
-      // crawlLinks: true,
-      // routes: [
-      //   '/',
-      // ],
+      crawlLinks: true,
+      routes: ['/sitemap.xml', '/robots.txt'],
     },
     publicAssets: [
       {
@@ -103,9 +102,6 @@ export default defineNuxtConfig({
       },
 
     ],
-  },
-  hub: {
-    database: true,
   },
   devtools: { enabled: false },
   modules: [
@@ -146,7 +142,7 @@ export default defineNuxtConfig({
     },
     database: {
       type: 'd1',
-      bindingName: 'sleepwalkers',
+      bindingName: 'DB',
     },
     renderer: {
       anchorLinks: false,
