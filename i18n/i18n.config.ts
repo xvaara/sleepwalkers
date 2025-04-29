@@ -17,6 +17,7 @@ export default defineI18nConfig(() => ({
       'Toiminnanjohtaja': 'Toiminnanjohtaja',
       'facebook': 'Facebook',
       'instagram': 'Instagram',
+      'Etusivulle': 'Etusivulle',
     },
     en: {
       'Harjoitukset': 'Practices',
@@ -32,6 +33,7 @@ export default defineI18nConfig(() => ({
       'Toiminnanjohtaja': 'Executive Director',
       'facebook': 'Facebook',
       'instagram': 'Instagram',
+      'Etusivulle': 'Go to homepage',
     },
   },
 }))

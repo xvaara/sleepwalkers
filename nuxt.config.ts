@@ -114,7 +114,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     ['unplugin-icons/nuxt', { /* options */ }],
     '@nuxt/image',
-    'nuxt-simple-robots',
+    '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@vueuse/nuxt',
   ],
@@ -139,11 +139,17 @@ export default defineNuxtConfig({
   //   '/en': { prerender: true },
   // },
   content: {
-    highlight: false,
-    markdown: {
+    build: {
+      markdown: {
+        highlight: false,
+      },
+    },
+    renderer: {
       anchorLinks: false,
     },
-
+    preview: {
+      api: 'https://api.nuxt.studio',
+    },
   },
   image: {
     screens: {
@@ -160,4 +166,16 @@ export default defineNuxtConfig({
   },
   ssr: true,
   // target: 'static',
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          charset: false,
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+        },
+      },
+    },
+  },
+  compatibilityDate: '2025-04-29',
 })

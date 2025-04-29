@@ -58,7 +58,7 @@
           id="sidebar-menu"
           v-model="sidebar"
           :teleport-disabled="true"
-          :backdrop="false"
+          no-backdrop
           class="h-100 border-0"
           :body-scrolling="isLargeScreen"
           header-class="bg-primary py-0"
@@ -96,10 +96,10 @@
             <BListGroup class="pb-0 mb-3 rounded-top-0">
               <BListGroupItem
                 v-for="post in blogPosts"
-                :key="post._id"
+                :key="post.id"
                 class
               >
-                <NuxtLink :to="`${post._path}`">
+                <NuxtLink :to="`${post.path}`">
                   {{ post.title }}
                 </NuxtLink>
               </BListGroupItem>
@@ -110,6 +110,11 @@
         </BOffcanvas>
       </aside>
       <main class="mt-3">
+        <!-- <div>{{ locale }} - {{ otherLocale }}  -- {{ computedSwitchLocalePath }}</div>
+        <pre>
+          {{ navigation }}
+          {{ navigationOtherLocale }}
+        </pre> -->
         <BContainer>
           <slot />
         </BContainer>
@@ -156,22 +161,16 @@ onMounted(() => {
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
-const { data: blogPosts } = await useAsyncData('home-blogposts', () => queryContent(`/${locale.value}/blog`).where({
-  $and: [
-    {
-      _file: {
-        $ne: '_dir.yml',
-      },
-    },
-    {
-      published: true,
-    },
-  ],
-}).sort({ date: -1 }).limit(4).find(), { watch: [locale] })
+const { data: blogPosts } = await useAsyncData(() => `home-blogposts-${locale.value}`, () =>
+  queryCollection('blog')
+    .where('path', 'LIKE', `/${locale.value}/blog%`)
+    .andWhere(query => query.where('published', '=', true))
+    .order('date', 'DESC')
+    .limit(4).all())
 // console.log(blogPosts)
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent(`/${locale.value}/`)), { watch: [locale] })
-const { data: navigationOtherLocale } = await useAsyncData('navigationOtherLocale', () => fetchContentNavigation(queryContent(`/${otherLocale.value}/`)), { watch: [locale] })
+const { data: navigation } = await useAsyncData(() => `navigation-${locale.value}`, () => queryCollectionNavigation('content').where('path', 'LIKE', `/${locale.value}/%`))
+const { data: navigationOtherLocale } = await useAsyncData(() => `navigationOtherLocale-${locale.value}`, () => queryCollectionNavigation('content').where('path', 'LIKE', `/${otherLocale.value}/%`))
 
 const navigationComputed = computed(() => {
   if (!navigation.value?.[0].children)
@@ -179,34 +178,27 @@ const navigationComputed = computed(() => {
   return navigation.value[0].children
     .map(i => ({
       label: i.title,
-      route: i._path,
+      route: i.path,
     }))
 })
 // const switchLocalePath = useSwitchLocalePath()
 
 // const router = useRouter()
-const { data: otherBlogPosts } = await useAsyncData(`all-blogposts-${otherLocale.value}`, () => queryContent(otherLocale.value, 'blog').where({
-  $and: [
-    {
-      _file: {
-        $ne: '_dir.yml',
-      },
-    },
-    {
-      published: true,
-    },
-  ],
-}).find(), { watch: [locale] })
+const { data: otherBlogPosts } = await useAsyncData(() => `all-blogposts-${otherLocale.value}`, () =>
+  queryCollection('blog')
+    .where('path', 'LIKE', `/${otherLocale.value}/blog%`)
+    .andWhere(query => query.where('published', '=', true))
+    .all())
 
 function hasLocaleSwitch(link: string) {
-  if (navigationOtherLocale.value?.[0]?._path === link)
+  if (navigationOtherLocale.value?.[0]?.path === link)
     return true
-  if (navigationOtherLocale.value?.[0]?.children?.some(i => i._path === link))
+  if (navigationOtherLocale.value?.[0]?.children?.some(i => i.path === link))
     return true
   if (link === `/${otherLocale.value}/blog`)
     return true
   if (link.includes('/blog')) {
-    if (otherBlogPosts.value?.some(i => i._path === link))
+    if (otherBlogPosts.value?.some(i => i.path === link))
       return true
   }
   return false
@@ -221,7 +213,6 @@ const computedSwitchLocalePath = computed(() => {
 
   while (!hasLocaleSwitch(link) && link.includes('/') && link !== '/')
     link = link.replace(/\/[^/]*$/, '')
-
   return {
     to: link,
     label: locale.value === 'fi' ? 'English' : 'Suomi',
@@ -263,6 +254,19 @@ const headerExternalLinks = [
 
 const dark = useColorMode({
   persist: true,
+})
+
+onMounted(() => {
+  watch(
+    dark,
+    (newValue) => {
+      if (newValue === 'dark')
+        document.documentElement.classList.add('dark')
+      else
+        document.documentElement.classList.remove('dark')
+    },
+    { immediate: true },
+  )
 })
 
 const map = {

@@ -1,13 +1,13 @@
 <template>
-  <div class="d-flex flex-wrap justify-content-around">
-    <InstagramPost v-for="post of data" :key="post.id" :url="post.url" class="col-12 col-md-6" />
+  <div class="row">
+    <InstagramPost v-for="post of data" :key="post.id" :url="post.url" class="col-12 col-md-6 mb-3" />
   </div>
 </template>
 
 <script setup>
 import igdata from '../public/data/ig.json'
 
-const data = ref(igdata)
+const data = ref(igdata.splice(0, 6))
 // const url = useRequestURL()
 // const { data } = useAsyncData('ig.json', () => $fetch(`${url.protocol}//${url.host}/data/ig.json`))
 // const { data } = useFetch(`${url.protocol}//${url.host}/data/ig.json`)

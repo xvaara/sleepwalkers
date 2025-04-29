@@ -16,22 +16,22 @@
       </div>
     </div>
     <div class="row">
-      <div v-for="(practice, index) in practices" :key="practice._id" class="col-12">
+      <div v-for="(practice, index) in practices" :key="practice.id" class="col-12">
         <div class="card mb-3 shadow">
           <div class="d-flex" :class="(index % 2) === 0 ? 'flex-lg-row-reverse' : ''">
             <div class="col-12 col-lg-6">
               <div class="card-header">
                 <h4>
-                  {{ practice.time }} – {{ practice.title }}
+                  {{ practice.meta.time }} – {{ practice.title }}
                 </h4>
               </div>
               <div class="card-body">
-                <p>{{ practice.location }}</p>
+                <p>{{ practice.meta.location }}</p>
                 <ContentRenderer :value="practice" />
               </div>
             </div>
             <div class="col-12 col-lg-6">
-              <div v-if="practice.map" class="container-iframe rounded-bottom rounded-bottom-lg-0" :class="(index % 2) === 0 ? 'rounded-start-lg' : 'rounded-end-lg'" v-html="practice.map" />
+              <div v-if="practice.meta.map" class="container-iframe rounded-bottom rounded-bottom-lg-0" :class="(index % 2) === 0 ? 'rounded-start-lg' : 'rounded-end-lg'" v-html="practice.meta.map" />
             </div>
           </div>
         </div>
@@ -48,13 +48,12 @@
 <script setup lang="ts">
 const { path } = useRoute()
 
-const { data, error } = await useAsyncData(`practices-${path}`, () => queryContent(path).find())
-
+const { data } = await useAsyncData(() => `practices-${path}`, () => queryCollection('content').where('path', 'LIKE', `${path}%`).all())
 const page = computed(() => {
-  return data.value?.find(item => item._file?.match(/index\.md/)) || {}
+  return data.value?.find(item => item.id?.match(/index\.md/)) || {}
 })
 const practices = computed(() => {
-  return data.value?.filter(item => !item._file?.match(/index\.md/))
+  return data.value?.filter(item => !item.id?.match(/index\.md/))
 })
 </script>
 

@@ -1,28 +1,35 @@
 <template>
   <div>
-    <div class="card p-1 mb-3 shadow">
-      <div class="d-flex justify-content-between align-items-end">
-        <NuxtLink :to="prev?._path">
-          <ChevronLeft />{{ $t('Edellinen') }}
-        </NuxtLink>
-        <NuxtLink :to="localePath('/blog')" class="text-center">
-          <ChevronUp /><br>
-          {{ $t('Takaisin') }}
-        </NuxtLink>
-        <NuxtLink :to="next?._path">
-          {{ $t('Seuraava') }}<ChevronRight />
-        </NuxtLink>
+    <template v-if="postData">
+      <div class="card p-1 mb-3 shadow">
+        <div class="d-flex justify-content-between align-items-end">
+          <NuxtLink :to="prev?.path">
+            <ChevronLeft />{{ $t('Edellinen') }}
+          </NuxtLink>
+          <NuxtLink :to="localePath('/blog')" class="text-center">
+            <ChevronUp /><br>
+            {{ $t('Takaisin') }}
+          </NuxtLink>
+          <NuxtLink :to="next?.path">
+            {{ $t('Seuraava') }}<ChevronRight />
+          </NuxtLink>
+        </div>
       </div>
-    </div>
-    <h2>{{ data.title }}</h2>
-    <p>{{ new Date(data.date).toLocaleDateString(locale) }}</p>
-    <BlogImage v-if="showDefaultImage" :src="data.image" />
-    <div>
-      <ContentRenderer v-if="postData" :value="postData">
-        <template #empty>
-          <p>No content found.</p>
-        </template>
-      </ContentRenderer>
+      <h2>{{ data.title }}</h2>
+      <p>{{ new Date(data.date).toLocaleDateString(locale) }}</p>
+      <BlogImage v-if="showDefaultImage" :src="data.image" />
+      <div>
+        <ContentRenderer :value="postData">
+          <template #empty>
+            <p>No content found.</p>
+          </template>
+        </ContentRenderer>
+      </div>
+    </template>
+    <div v-else>
+      <p class="text-center">
+        {{ $t('404 Not Found') }}
+      </p>
     </div>
   </div>
 </template>
@@ -37,28 +44,26 @@ const localePath = useLocalePath()
 const { path } = useRoute()
 const { locale } = useI18n()
 
-const { data: postData, error } = await useAsyncData(`blog-post-${path}`, () => queryContent(path).findOne())
-const [prev, next] = await queryContent(locale.value, 'blog').where({
-  $and: [
-    {
-      _file: {
-        $ne: '_dir.yml',
-      },
-    },
-    {
-      published: true,
-    },
-  ],
-}).sort({ date: -1 }).findSurround(path)
+const { data: postData } = await useAsyncData(() => `blog-post-${path}`, () => queryCollection('blog').path(path).first())
+const [prev, next] = await queryCollectionItemSurroundings('blog', path)
+  .where('path', 'LIKE', `/${locale.value}/blog%`)
+  .andWhere(query => query.where('published', '=', true))
+  .order('date', 'ASC')
 
-if (error.value)
-  navigateTo('/404')
+if (!postData.value) {
+  throw createError({
+    fatal: true,
+    statusCode: 404,
+    statusMessage: 'Not Found',
+    message: 'Blog post not found',
+  })
+}
 
 const data = computed<BlogPost>(() => {
   return makeBLogPost(postData)
 })
 
-const showDefaultImage = computed(() => !JSON.stringify(postData.value?.body).includes(postData.value?.image))
+const showDefaultImage = computed(() => postData.value?.image && !JSON.stringify(postData.value?.body).includes(postData.value?.image))
 
 useHead({
   title: data.value.title || '',
@@ -85,7 +90,7 @@ useHead({
     },
     {
       property: 'og:image',
-      content: data.value.ogImage || data.value.image,
+      content: data.value.ogImage.startsWith('http') ? data.value.ogImage : `https://sleepwalkers.fi/${data.value.ogImage}`,
     },
     // Test on: https://cards-dev.twitter.com/validator or https://socialsharepreview.com/
     { name: 'twitter:site', content: '@qdnvubp' },
@@ -104,7 +109,7 @@ useHead({
     },
     {
       name: 'twitter:image',
-      content: data.value.ogImage || data.value.image,
+      content: data.value.ogImage.startsWith('http') ? data.value.ogImage : `https://sleepwalkers.fi/${data.value.ogImage}`,
     },
   ],
   link: [

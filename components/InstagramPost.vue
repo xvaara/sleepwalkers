@@ -1,5 +1,5 @@
 <template>
-  <div class="p-1">
+  <div class="">
     <blockquote
       class="instagram-media" data-instgrm-captioned :data-instgrm-permalink="urlComputed" data-instgrm-version="14"
       nstyle=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);"

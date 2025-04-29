@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
-const { data } = await useAsyncData(`contact`, async () => await queryContent('/contact').findOne())
+const { data } = await useAsyncData(`contact`, async () => await queryCollection('data').path('/contact').first())
+
 // const data = {}
 </script>

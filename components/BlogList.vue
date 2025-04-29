@@ -18,18 +18,12 @@ const props = defineProps<{
 
 const { locale } = useI18n()
 
-const { data } = await useAsyncData(`all-blogposts-${locale.value}`, () => queryContent(locale.value, 'blog').where({
-  $and: [
-    {
-      _file: {
-        $ne: '_dir.yml',
-      },
-    },
-    {
-      published: true,
-    },
-  ],
-}).sort({ date: -1 }).find(), { watch: [locale] })
+const { data } = await useAsyncData(() => `all-blogposts-${locale.value}`, () => queryCollection('blog')
+  .where('path', 'LIKE', `/${locale.value}/blog%`)
+  .andWhere(query => query.where('published', '=', true))
+  .order('date', 'DESC')
+  .all())
+
 const blogPosts = computed(() => {
   if (!data.value)
     return []

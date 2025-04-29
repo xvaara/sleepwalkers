@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BCarousel id="front-carousel" controls indicators ride="carousel" class="rounded">
+    <BCarousel id="front-carousel" :key="`b${images.length}`" controls indicators ride="carousel" class="rounded">
       <BCarouselSlide
         v-for="image in images"
         :key="image"
@@ -29,16 +29,13 @@
 </template>
 
 <script setup>
+import gallery from '../public/images/gallery.json'
+
 const { path } = useRoute()
-const { data, error } = await useAsyncData(`index-${path}`, () => queryContent(path).findOne())
+const { data, error } = await useAsyncData(() => `index-${path}`, () => queryCollection('content').path(path).first())
 if (error.value)
   console.error(error.value)
-
-const images = ref(['/images/sleepwalkers.png'])
-onMounted(async () => {
-  const newImage = await fetch('/images/gallery.json').then(res => res.json())
-  images.value = [images.value[0], ...newImage]
-})
+const images = ref(['/images/sleepwalkers.png', ...gallery])
 </script>
 
 <style>
