@@ -144,6 +144,10 @@ export default defineNuxtConfig({
         highlight: false,
       },
     },
+    database: {
+      type: 'd1',
+      bindingName: 'sleepwalkers',
+    },
     renderer: {
       anchorLinks: false,
     },
