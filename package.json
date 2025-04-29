@@ -1,7 +1,6 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "npm@10.10.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
