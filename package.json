@@ -1,6 +1,7 @@
 {
   "type": "module",
   "private": true,
+  "packageManager": "npm@10.10.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -23,6 +24,7 @@
     "@nuxtjs/robots": "^5.2.10",
     "@nuxtjs/sitemap": "^7.2.10",
     "@vueuse/core": "^13.1.0",
+    "@vueuse/nuxt": "^13.1.0",
     "bootstrap-styles": "^5.3.3",
     "eslint": "^9.1.1",
     "nuxt": "^3.11.2",
