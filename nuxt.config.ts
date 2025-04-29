@@ -82,7 +82,7 @@ export default defineNuxtConfig({
     prerender: {
       autoSubfolderIndex: false,
       crawlLinks: true,
-      routes: ['/sitemap.xml', '/robots.txt'],
+      routes: ['/', '/sitemap.xml', '/robots.txt'],
     },
     publicAssets: [
       {
