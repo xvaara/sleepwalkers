@@ -16,11 +16,11 @@ Tervetuloa harrastamaan seurassamme ultimate!
         <img src="/images/jss-logo.png" class="img-fluid" />
       ::::
       ::::column
-        JSS XII
-        JSS vol. XII järjestetään pe-su 24.-26.05.2024.
+        JSS XIII
+        JSS vol. XIII järjestetään pe-su 6.-8.6.2025.
 
         Turnaus
-        JSS on Jyväskylässä toukokuun lopussa järjestettävä ultimate-turnaus ja turnausareenana toimii legendaarisen Viitaniemen Liikuntapuiston uudet ja päivitetyt puitteet. Ultimate-pelien lisäksi tarjolla on tietysti iltaohjelmaa, hyvää seuraa, ruokapalvelua, mukavaa yhdessäoloa ja todella hyvä Spiritti!
+        JSS on Jyväskylässä kesäkuun alussa järjestettävä ultimate-turnaus ja turnausareenana toimii vehkalahden kenttä. Ultimate-pelien lisäksi tarjolla on tietysti iltaohjelmaa, hyvää seuraa, ruokapalvelua, mukavaa yhdessäoloa ja todella hyvä Spiritti!
 
         Jyväskylä Sleepwalker toivottaa tervetulleeksi Keski-Suomeen!
       ::::
