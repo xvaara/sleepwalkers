@@ -18,16 +18,24 @@ export default defineNuxtConfig({
       try {
         console.log('get ig...')
         const ig = await getIgData()
-        if (ig.error)
-          console.error('Error getting ig data', ig.error)
-        else
+        if (Array.isArray(ig) && ig.length > 0) {
+          console.log('got ig data', ig.length)
           await writeFile(path.join('public', 'data', 'ig.json'), JSON.stringify(ig, null, 2))
+        }
+        else {
+          console.error('Error getting ig data', ig)
+        }
+      }
+      catch (e) {
+        console.error('Error getting ig data', e)
+      }
+      try {
         console.log('get practices...')
         const practices = await getPracticesData()
         await writeFile(path.join('public', 'data', 'practices.json'), JSON.stringify(practices, null, 2))
       }
       catch (e) {
-        console.error('Error getting data', e)
+        console.error('Error getting practices data', e)
       }
     },
   },

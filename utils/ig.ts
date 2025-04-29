@@ -7,18 +7,13 @@ export async function getIgData(): Promise<object> {
       'Referrer-Policy': 'strict-origin-when-cross-origin',
     },
   })
-    .then(res => res.text())
-    .then((data) => {
-      // console.log('data', data)
-      let json
-      try {
-        json = JSON.parse(data)
+    .then(async (res) => {
+      if (!res.ok) {
+        console.error('Error fetching Instagram data', res.status, res.statusText)
+        return { error: 'Error fetching Instagram data' }
       }
-      catch (e) {
-        console.error('Error parsing JSON', e)
-        return { error: 'Error parsing JSON', data }
-      }
-      return parseIg(json)
+      const data = await res.json()
+      return parseIg(data)
     })
 }
 
