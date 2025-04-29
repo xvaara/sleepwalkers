@@ -1,9 +1,9 @@
 export async function getIgData(): Promise<object> {
-  return fetch('https://i.instagram.com/api/v1/users/web_profile_info/?username=sleepwalkersultimate', {
+  return fetch('https://www.instagram.com/api/v1/users/web_profile_info/?username=sleepwalkersultimate', {
     headers: {
       'accept': 'text/json',
       'x-ig-app-id': '936619743392459',
-      'Referer': 'https://www.instagram.com/',
+      'Referer': 'https://www.instagram.com/sleepwalkersultimate/',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
     },
   })
