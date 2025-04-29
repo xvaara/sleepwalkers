@@ -15,16 +15,27 @@ export default defineNuxtConfig({
       const images = files.filter(i => i.match(/\.(jpeg|jpg|gif|png)/) !== null).map(i => `/images/gallery/${i}`)
       const target = path.join('public', 'images/gallery.json')
       await writeFile(target, JSON.stringify(images, null, 2))
+
       try {
         console.log('get ig...')
-        const ig = await getIgData()
-        if (Array.isArray(ig) && ig.length > 0) {
-          console.log('got ig data', ig.length)
-          await writeFile(path.join('public', 'data', 'ig.json'), JSON.stringify(ig, null, 2))
+        let ig = null
+        for (let attempt = 1; attempt <= 4; attempt++) {
+          const timeStart = Date.now()
+          ig = await getIgData()
+          const timeEnd = Date.now()
+          const timeDiff = timeEnd - timeStart
+          console.log(`Attempt ${attempt} took ${timeDiff}ms`)
+          if (Array.isArray(ig) && ig.length > 0) {
+            console.log(`got ig data on attempt ${attempt}`, ig.length)
+            await writeFile(path.join('public', 'data', 'ig.json'), JSON.stringify(ig, null, 2))
+            break
+          }
+          else {
+            console.warn(`Attempt ${attempt} failed to get ig data`, ig)
+          }
         }
-        else {
-          console.error('Error getting ig data', ig)
-        }
+        if (!Array.isArray(ig) || ig.length === 0)
+          console.error('Error getting ig data after 4 attempts', ig)
       }
       catch (e) {
         console.error('Error getting ig data', e)
