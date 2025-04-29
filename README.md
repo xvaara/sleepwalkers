@@ -14,18 +14,27 @@ Jos epäselvää, kysy Jukalta apua.
 
 - Tee github tunnus
 - Tee uusi pull request stackblitzin kautta: [new pull request](https://pr.new/xvaara/sleepwalkers)
+- Kirjaudu stackblitzin github tunnuksilla
 - Muokkaa sivuja ja tallenna muutokset
+- Commit omaan forkkiin
 - Tee pull request
+
+Video-ohjeet: [https://youtu.be/h2wS0B1sv5I](https://youtu.be/h2wS0B1sv5I)
 
 ## Lokaali muokkaaminen
 
 - Tee github tunnus
 - Asenna git
 - Asenna node.js
-- Kloonaa tämä repository
+- github:issa forkkaa tämä repository
+- Kloonaa oma fork lokaalisti
+- Luo uusi branch omassa forkissa
 - Asenna riippuvuudet
 - Käynnistä kehitysserveri
-- Tee muutoksia ja puske ne githubiin
+- Tee muutoksia
+- commit
+- Puske muutokset omaan forkkiin
+- Tee pull request alkuperäiseen repositoryyn
 
 ## Kloonaa tämä repository
 
