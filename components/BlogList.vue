@@ -2,7 +2,7 @@
   <div
     v-for="post in blogPosts"
     :key="post.id"
-    :class="$attrs.class"
+    :class="props.class"
   >
     <slot :post="post">
       <BlogListItem :post="post" />
@@ -14,6 +14,7 @@
 const props = defineProps<{
   limit?: number
   search?: string
+  class?: string
 }>()
 
 const { locale } = useI18n()

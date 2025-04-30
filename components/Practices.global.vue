@@ -12,7 +12,7 @@
           class="text-decoration-none text-body mb-3 "
         >
           <div class="bg-primary px-1 rounded-top">
-            {{ item.date.toLocaleDateString(locale, { weekday: 'short' }) }} {{ item.date.toLocaleDateString(locale) }} {{ item.date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }) }}
+            {{ item.date.toLocaleDateString(locale, { weekday: 'short', timeZone: 'Europe/Helsinki' }) }} {{ item.date.toLocaleDateString(locale, { timeZone: 'Europe/Helsinki' }) }} {{ item.date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Helsinki' }) }}
           </div>
           <div class="fw-bold px-1">
             {{ item.title }}
