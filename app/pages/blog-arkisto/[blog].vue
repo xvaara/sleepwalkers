@@ -1,20 +1,20 @@
 <template>
   <div>
     <template v-if="postData">
-      <div class="card p-1 mb-3 shadow">
-        <div class="d-flex justify-content-between align-items-end">
+      <UCard class="mb-3">
+        <div class="flex justify-between items-end">
           <NuxtLink :to="prev?.path">
-            <ChevronLeft />{{ $t('Edellinen') }}
+            <UIcon name="i-lucide-chevron-left" />{{ $t('Edellinen') }}
           </NuxtLink>
           <NuxtLink :to="localePath('/blog-arkisto')" class="text-center">
-            <ChevronUp /><br>
+            <UIcon name="i-lucide-chevron-up" /><br>
             {{ $t('Takaisin') }}
           </NuxtLink>
           <NuxtLink :to="next?.path">
-            {{ $t('Seuraava') }}<ChevronRight />
+            {{ $t('Seuraava') }}<UIcon name="i-lucide-chevron-right" />
           </NuxtLink>
         </div>
-      </div>
+      </UCard>
       <h2>{{ data.title }}</h2>
       <p>{{ new Date(data.date).toLocaleDateString(locale) }}</p>
       <BlogImage v-if="showDefaultImage" :src="data.image" />
@@ -35,9 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import ChevronRight from '~icons/bi/chevron-right'
-import ChevronLeft from '~icons/bi/chevron-left'
-import ChevronUp from '~icons/bi/chevron-up'
 import type { BlogPost } from '~/types/blog'
 
 const localePath = useLocalePath()
@@ -77,7 +74,6 @@ useHead({
       name: 'description',
       content: data.value.description,
     },
-    // Test on: https://developers.facebook.com/tools/debug/ or https://socialsharepreview.com/
     { property: 'og:site_name', content: 'Sleepwalkers ultimate' },
     { hid: 'og:type', property: 'og:type', content: 'website' },
     {
@@ -96,7 +92,6 @@ useHead({
       property: 'og:image',
       content: data.value.ogImage.startsWith('http') ? data.value.ogImage : `https://sleepwalkers.fi/${data.value.ogImage}`,
     },
-    // Test on: https://cards-dev.twitter.com/validator or https://socialsharepreview.com/
     { name: 'twitter:site', content: '@qdnvubp' },
     { name: 'twitter:card', content: 'summary_large_image' },
     {
@@ -123,13 +118,4 @@ useHead({
     },
   ],
 })
-
-// Generate OG Image
-// defineOgImageComponent('NuxtSeo', {
-//   headline: 'Greetings 👋',
-//   title: data.value.title || '',
-//   description: data.value.description || '',
-//   link: data.value.ogImage,
-
-// })
 </script>

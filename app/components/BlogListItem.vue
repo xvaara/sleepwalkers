@@ -1,20 +1,20 @@
 <template>
-  <NuxtLink :to="post.url" class="text-decoration-none">
-    <div class="card mb-3" style="">
-      <BlogImage :src="post.image" class="card-img-top" :alt="post.alt" />
+  <NuxtLink :to="post.url" class="no-underline">
+    <UCard class="mb-3">
+      <BlogImage :src="post.image" class="w-full rounded" :alt="post.alt" />
 
-      <div class="card-body">
-        <h5 class="card-title">
+      <div class="mt-3">
+        <h5 class="font-semibold">
           {{ post.title }}
         </h5>
-        <p class="card-text">
+        <p>
           {{ post.description }}
         </p>
-        <p class="card-text">
-          <small class="text-body-secondary">{{ new Date(post.date).toLocaleDateString(locale) }}</small>
+        <p>
+          <small class="text-gray-500 dark:text-gray-400">{{ new Date(post.date).toLocaleDateString(locale) }}</small>
         </p>
       </div>
-    </div>
+    </UCard>
   </NuxtLink>
 </template>
 

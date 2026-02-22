@@ -109,16 +109,18 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: [
     '@nuxt/content',
-    '@bootstrap-vue-next/nuxt',
     '@nuxtjs/i18n',
-    ['unplugin-icons/nuxt', { /* options */ }],
     '@nuxt/image',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@vueuse/nuxt',
     'nuxt-studio',
+    '@nuxt/ui',
   ],
-  css: ['~/assets/bootstrap.scss'],
+  css: ['~/assets/css/main.css'],
+  colorMode: {
+    preference: 'light',
+  },
   i18n: {
     locales: ['fi', 'en'], // used in URL path prefix
     defaultLocale: 'fi', // default locale of your project for Nuxt pages and routings
@@ -173,15 +175,6 @@ export default defineNuxtConfig({
   vite: {
     define: {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          charset: false,
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'if-function'],
-        },
-      },
     },
   },
   studio: {

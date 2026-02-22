@@ -1,47 +1,38 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
         <ContentRenderer v-if="page" :value="page">
           <template #empty>
             <p>No content found.</p>
           </template>
         </ContentRenderer>
       </div>
-      <div class="col">
+      <div>
         <h4>
           {{ $t('Seuraavat harjoitukset') }}
         </h4>
         <Practices />
       </div>
     </div>
-    <div class="row">
-      <div v-for="(practice, index) in practices" :key="practice.id" class="col-12">
-        <div class="card mb-3 shadow">
-          <div class="d-flex" :class="(index % 2) === 0 ? 'flex-lg-row-reverse' : ''">
-            <div class="col-12 col-lg-6">
-              <div class="card-header">
-                <h4>
-                  {{ practice.meta.time }} – {{ practice.title }}
-                </h4>
-              </div>
-              <div class="card-body">
-                <p>{{ practice.meta.location }}</p>
-                <ContentRenderer :value="practice" />
-              </div>
+    <div class="space-y-4 mt-4">
+      <div v-for="(practice, index) in practices" :key="practice.id">
+        <UCard>
+          <div class="flex flex-col" :class="(index % 2) === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'">
+            <div class="w-full lg:w-1/2 p-4">
+              <h4>
+                {{ practice.meta.time }} – {{ practice.title }}
+              </h4>
+              <p>{{ practice.meta.location }}</p>
+              <ContentRenderer :value="practice" />
             </div>
-            <div class="col-12 col-lg-6">
-              <div v-if="practice.meta.map" class="container-iframe rounded-bottom rounded-bottom-lg-0" :class="(index % 2) === 0 ? 'rounded-start-lg' : 'rounded-end-lg'" v-html="practice.meta.map" />
+            <div class="w-full lg:w-1/2">
+              <div v-if="practice.meta.map" class="container-iframe rounded-b lg:rounded-b-none" :class="(index % 2) === 0 ? 'lg:rounded-l' : 'lg:rounded-r'" v-html="practice.meta.map" />
             </div>
           </div>
-        </div>
+        </UCard>
       </div>
     </div>
-    <!-- <ContentRenderer v-if="postData" :value="postData">
-        <template #empty>
-          <p>No content found.</p>
-        </template>
-      </ContentRenderer> -->
   </div>
 </template>
 
@@ -57,19 +48,19 @@ const practices = computed(() => {
 })
 </script>
 
-<style lang="scss">
+<style>
 .container-iframe {
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+  padding-top: 56.25%;
+}
+.container-iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>

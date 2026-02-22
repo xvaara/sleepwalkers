@@ -1,7 +1,7 @@
 <template>
-  <BCard>
+  <UCard class="p-3">
     <slot />
-  </BCard>
+  </UCard>
 </template>
 
 <script setup lang="ts">

@@ -1,22 +1,39 @@
 <template>
   <div>
-    <BCarousel id="front-carousel" :key="`b${images.length}`" controls indicators ride="carousel" class="rounded">
-      <BCarouselSlide
-        v-for="image in images"
+    <div class="relative overflow-hidden rounded aspect-video">
+      <img
+        v-for="(image, i) in images"
         :key="image"
-        class="ratio ratio-16x9"
-        :img-src="image"
-      />
-    </BCarousel>
+        :src="image"
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+        :class="i === currentSlide ? 'opacity-100' : 'opacity-0'"
+        alt=""
+      >
+      <button class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60" @click="prev">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+      </button>
+      <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60" @click="next">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+      </button>
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+        <button
+          v-for="(_, i) in images"
+          :key="i"
+          class="w-2 h-2 rounded-full transition-colors"
+          :class="i === currentSlide ? 'bg-white' : 'bg-white/50'"
+          @click="currentSlide = i"
+        />
+      </div>
+    </div>
 
     <ContentRenderer :value="data">
       <template #empty />
     </ContentRenderer>
 
-    <div class="w-100">
+    <div class="w-full">
       <h3>{{ $t('Seuraavat harjoitukset') }}</h3>
       <Practices
-        class="row" item-class="col-12 col-lg-6"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-4" item-class=""
       />
     </div>
     <ClientOnly>
@@ -33,13 +50,20 @@ const { data, error } = await useAsyncData(() => `index-${path}`, () => queryCol
 if (error.value)
   console.error(error.value)
 const images = ref(['/images/sleepwalkers.png', ...gallery])
-</script>
+const currentSlide = ref(0)
 
-<style>
-.ratio img {
-  object-fit: cover;
+let interval
+onMounted(() => {
+  interval = setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % images.value.length
+  }, 5000)
+})
+onUnmounted(() => clearInterval(interval))
+
+function prev() {
+  currentSlide.value = (currentSlide.value - 1 + images.value.length) % images.value.length
 }
-.carousel.rounded > .carousel-inner {
-  border-radius: var(--bs-border-radius) !important;
+function next() {
+  currentSlide.value = (currentSlide.value + 1) % images.value.length
 }
-</style>
+</script>

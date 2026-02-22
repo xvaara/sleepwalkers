@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <BFormInput id="blog-search" v-model="search" :placeholder="$t('Hae blogitekstejä')" class="mb-3" />
+      <UInput id="blog-search" v-model="search" :placeholder="$t('Hae blogitekstejä')" class="mb-3" />
     </div>
     <BlogList :search="search" />
   </div>

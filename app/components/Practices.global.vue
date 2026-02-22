@@ -6,19 +6,19 @@
       class="mb-3"
       :class="props.itemClass"
     >
-      <div class=" rounded shadow">
+      <div class="rounded shadow">
         <a
           :href="item.url"
-          class="text-decoration-none text-body mb-3 "
+          class="no-underline text-inherit mb-3"
         >
-          <div class="bg-primary px-1 rounded-top">
+          <div class="bg-brand px-1 rounded-t text-white">
             {{ item.date.toLocaleDateString(locale, { weekday: 'short', timeZone: 'Europe/Helsinki' }) }} {{ item.date.toLocaleDateString(locale, { timeZone: 'Europe/Helsinki' }) }} {{ item.date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Helsinki' }) }}
           </div>
-          <div class="fw-bold px-1">
+          <div class="font-bold px-1">
             {{ item.title }}
           </div>
-          <div class="text-small border-top mt-2 px-1">{{ small ? item.location.split(',')[0] : item.location }}</div>
-          <div class="text-small border-top mt-2 px-1" v-html="item.description" />
+          <div class="text-sm border-t mt-2 px-1">{{ small ? item.location.split(',')[0] : item.location }}</div>
+          <div class="text-sm border-t mt-2 px-1" v-html="item.description" />
         </a>
       </div>
     </div>
@@ -40,18 +40,13 @@ const props = defineProps({
   },
 })
 
-// const { data } = useFetch('https://test.mhx.fi/sleepwalkers/calendar/csv?'+new Date().getDate())
 const data = ref(pdata)
-// const url = useRequestURL()
-// const { data } = useAsyncData('practices.json', () => $fetch(`${url.protocol}//${url.host}/data/practices.json`))
-// console.log(data.value)
 const { locale } = useI18n()
 const limit = new Date()
 limit.setDate((limit.getDate() + 15))
 const computedData = computed(() => {
   if (!data.value)
     return []
-  // console.log('data', data.value)
   return data.value.map((item) => {
     return {
       ...item,
@@ -66,9 +61,3 @@ const computedData = computed(() => {
   })
 })
 </script>
-
-<style scoped>
-.text-small {
-  font-size: 0.8rem;
-}
-</style>

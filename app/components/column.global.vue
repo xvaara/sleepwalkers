@@ -1,5 +1,5 @@
 <template>
-  <div :class=" $attrs.class || 'col'">
+  <div>
     <slot />
   </div>
 </template>

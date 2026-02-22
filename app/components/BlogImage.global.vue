@@ -1,11 +1,11 @@
 <template>
-  <figure v-if="$slots.default" class="figure">
-    <NuxtPicture :src="props.src" :alt="props.alt" :img-attrs="{ class: `figure-img img-fluid w-100 ${props.class}` }" />
-    <figcaption class="figure-caption text-end">
+  <figure v-if="$slots.default">
+    <NuxtPicture :src="props.src" :alt="props.alt" :img-attrs="{ class: `w-full ${props.class}` }" />
+    <figcaption class="text-sm text-gray-500 dark:text-gray-400 text-end mt-1">
       <slot />
     </figcaption>
   </figure>
-  <NuxtPicture v-else :src="props.src" :alt="props.alt" :img-attrs="{ class: `img-fluid w-100 ${props.class}` }" />
+  <NuxtPicture v-else :src="props.src" :alt="props.alt" :img-attrs="{ class: `w-full ${props.class}` }" />
 </template>
 
 <script setup lang="ts">
