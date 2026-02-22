@@ -19,9 +19,6 @@
         class="row" item-class="col-12 col-lg-6"
       />
     </div>
-    <div class="row">
-      <BlogList :limit="4" class="col-12 col-lg-6" />
-    </div>
     <ClientOnly>
       <Instagram />
     </ClientOnly>

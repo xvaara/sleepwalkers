@@ -20,7 +20,7 @@ const props = defineProps<{
 const { locale } = useI18n()
 
 const { data } = await useAsyncData(() => `all-blogposts-${locale.value}`, () => queryCollection('blog')
-  .where('path', 'LIKE', `/${locale.value}/blog%`)
+  .where('path', 'LIKE', `/blog-arkisto%`)
   .andWhere(query => query.where('published', '=', true))
   .order('date', 'DESC')
   .all())

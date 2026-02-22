@@ -64,9 +64,12 @@ export default defineNuxtConfig({
 
   sitemap: {
     // strictNuxtContentPaths: true,
+    exclude: ['/blog-arkisto/**'],
+    include: ['/**'],
   },
   site: {
     url: 'https://sleepwalkers.fi',
+    name: 'Sleepwalkers ultimate ry',
     identity: {
       type: 'organization',
     },

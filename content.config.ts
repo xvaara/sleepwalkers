@@ -7,14 +7,14 @@ export default defineContentConfig({
       source: {
         include: '**/*.md',
         exclude: [
-          '**/blog/*.md',
+          'blog-arkisto/*.md',
         ],
       },
 
     }),
     blog: defineCollection({
       type: 'page',
-      source: '**/blog/*.md',
+      source: 'blog-arkisto/*.md',
 
       schema: z.object({
         tags: z.array(z.string()),

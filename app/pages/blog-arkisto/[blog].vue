@@ -6,7 +6,7 @@
           <NuxtLink :to="prev?.path">
             <ChevronLeft />{{ $t('Edellinen') }}
           </NuxtLink>
-          <NuxtLink :to="localePath('/blog')" class="text-center">
+          <NuxtLink :to="localePath('/blog-arkisto')" class="text-center">
             <ChevronUp /><br>
             {{ $t('Takaisin') }}
           </NuxtLink>
@@ -44,9 +44,9 @@ const localePath = useLocalePath()
 const { path } = useRoute()
 const { locale } = useI18n()
 
-const { data: postData } = await useAsyncData(() => `blog-post-${path}`, () => queryCollection('blog').path(path).first())
+const { data: postData } = await useAsyncData(() => `blog-post-${path}`, () => queryCollection('blog').path(path.replace(`/${locale.value}/`, '/')).first())
 const [prev, next] = await queryCollectionItemSurroundings('blog', path)
-  .where('path', 'LIKE', `/${locale.value}/blog%`)
+  .where('path', 'LIKE', `/blog-arkisto%`)
   .andWhere(query => query.where('published', '=', true))
   .order('date', 'ASC')
 
@@ -58,6 +58,10 @@ if (!postData.value) {
     message: 'Blog post not found',
   })
 }
+
+setTimeout(() => {
+  console.log(postData.value)
+}, 1000)
 
 const data = computed<BlogPost>(() => {
   return makeBLogPost(postData)

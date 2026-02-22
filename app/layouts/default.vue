@@ -9,13 +9,15 @@
         }"
       >
         <BNav class="d-flex">
-          <BNavItem
-            :to="computedSwitchLocalePath.to"
-            class="py-1"
-            active-class="active fw-bold"
-          >
-            {{ computedSwitchLocalePath.label }}
-          </BNavItem>
+          <li class="nav-item py-1">
+            <NuxtLink
+              :to="computedSwitchLocalePath.to"
+              class="nav-link"
+              active-class="active fw-bold"
+            >
+              {{ computedSwitchLocalePath.label }}
+            </NuxtLink>
+          </li>
           <BNavItem
             v-for="link in headerExternalLinks"
             :key="link.label"
@@ -44,9 +46,9 @@
     <BNavbar v-b-color-mode="'dark'" class="shadow" variant="primary" sticky="top" toggleable="lg" :container="true" style="--bs-navbar-padding-y: 0;">
       <div class="d-flex gap-2 align-items-center nav">
         <BNavbarToggle v-b-toggle.sidebar-menu class="my-1" />
-        <BNavbarBrand :to="localePath('/')" class="p-0 m-auto">
+        <NuxtLink :to="localePath('/')" class="navbar-brand p-0 m-auto">
           <img src="/images/sleepwalkers-logo.png" alt="Sleepwalkers" class="logo">
-        </BNavbarBrand>
+        </NuxtLink>
         <div class="border spacer border-secondary ms-3 me-0" />
       </div>
 
@@ -59,9 +61,11 @@
           v-model="sidebar"
           :teleport-disabled="true"
           no-backdrop
+          no-trap
           class="h-100 border-0"
           :body-scrolling="isLargeScreen"
           header-class="bg-primary py-0"
+          @shown="fixOffcanvasModal"
         >
           <template #header="{ hide }">
             <div v-b-color-mode="'dark'" class="d-flex align-items-center w-100">
@@ -76,35 +80,21 @@
               />
             </div>
           </template>
-          <BNav vertical class="shadow rounded mb-3">
-            <BNavItem
+          <ul class="nav flex-column shadow rounded mb-3">
+            <li
               v-for="link in navigationComputed"
               :key="link.route"
-              :to="link.route"
-              class="py-1"
-              active-class="active fw-bold"
+              class="nav-item py-1"
             >
-              {{ link.label }}
-            </BNavItem>
-          </BNav>
-          <div class="shadow rounded">
-            <BNav>
-              <BNavItem :to="localePath('/blog')">
-                {{ $t('Blogi') }}
-              </BNavItem>
-            </BNav>
-            <BListGroup class="pb-0 mb-3 rounded-top-0">
-              <BListGroupItem
-                v-for="post in blogPosts"
-                :key="post.id"
-                class
+              <NuxtLink
+                :to="link.route"
+                class="nav-link"
+                active-class="active fw-bold"
               >
-                <NuxtLink :to="`${post.path}`">
-                  {{ post.title }}
-                </NuxtLink>
-              </BListGroupItem>
-            </BListGroup>
-          </div>
+                {{ link.label }}
+              </NuxtLink>
+            </li>
+          </ul>
 
           <Practices small />
         </BOffcanvas>
@@ -121,20 +111,21 @@
       </main>
     </BContainer>
     <footer>
-      <BNav class="d-none">
-        <BNavItem
+      <ul class="nav d-none">
+        <li
           v-for="link in navigationComputed"
           :key="link.route"
-          :to="link.route"
-          class="py-1"
-          active-class="active fw-bold"
+          class="nav-item py-1"
         >
-          {{ link.label }}
-        </BNavItem>
-        <BNavItem :to="localePath('/blog')">
-          {{ $t('Blogi') }}
-        </BNavItem>
-      </BNav>
+          <NuxtLink
+            :to="link.route"
+            class="nav-link"
+            active-class="active fw-bold"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </li>
+      </ul>
     </footer>
   </div>
 </template>
@@ -152,8 +143,17 @@ const otherLocale = computed(() => (locale.value === 'fi' ? 'en' : 'fi'))
 const isLargeScreen = useMediaQuery('(min-width: 992px)')
 const sidebar = ref(true)
 
+function fixOffcanvasModal() {
+  const el = document.getElementById('sidebar-menu')
+  if (el) {
+    el.removeAttribute('aria-modal')
+    el.removeAttribute('role')
+  }
+}
+
 onMounted(() => {
   sidebar.value = isLargeScreen.value
+  nextTick(fixOffcanvasModal)
   watch(isLargeScreen, (value) => {
     sidebar.value = value
   })
