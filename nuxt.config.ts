@@ -124,11 +124,8 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['fi', 'en'], // used in URL path prefix
     defaultLocale: 'fi', // default locale of your project for Nuxt pages and routings
-    switchLocalePath: '/:lang/:route',
-    setLocaleCookie: true,
     strategy: 'prefix',
-    getLocaleCookie: 'i18n_loc',
-    vueI18n: './i18n.config.ts',
+    vueI18n: './i18n/i18n.config.ts',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',

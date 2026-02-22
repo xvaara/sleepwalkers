@@ -18,6 +18,7 @@ export default defineI18nConfig(() => ({
       'facebook': 'Facebook',
       'instagram': 'Instagram',
       'Etusivulle': 'Etusivulle',
+      'Muut tapahtumat': 'Muut tapahtumat',
     },
     en: {
       'Harjoitukset': 'Practices',
@@ -34,6 +35,7 @@ export default defineI18nConfig(() => ({
       'facebook': 'Facebook',
       'instagram': 'Instagram',
       'Etusivulle': 'Go to homepage',
+      'Muut tapahtumat': 'Other events',
     },
   },
 }))

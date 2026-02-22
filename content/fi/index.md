@@ -9,11 +9,11 @@ Tervetuloa harrastamaan seurassamme ultimatea!
 
 :contacts
 
-::a{ href="https://jklsummerstart.com" .text-decoration-none .text-body}
+::ULink{ href="https://jklsummerstart.com" .text-decoration-none .text-body}
   ::card{ .mb-3}
     :::row
       ::::column{ .col-12 .col-md-6 }
-        <img src="/images/jss-logo.png" class="img-fluid" />
+        ![JSS](/images/jss-logo.png){ :zoom="false" }
       ::::
       ::::column
         JSS XIV

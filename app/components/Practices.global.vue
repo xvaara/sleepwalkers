@@ -18,7 +18,7 @@
             {{ item.title }}
           </div>
           <div class="text-sm border-t mt-2 px-1">{{ small ? item.location.split(',')[0] : item.location }}</div>
-          <div class="text-sm border-t mt-2 px-1" v-html="item.description" />
+          <div v-if="!small" class="text-sm border-t mt-2 px-1" v-html="item.description" />
         </a>
       </div>
     </div>
@@ -27,7 +27,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import pdata from '../public/data/practices.json'
+import pdata from '../../public/data/practices.json'
 
 const props = defineProps({
   itemClass: {

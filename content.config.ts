@@ -8,6 +8,7 @@ export default defineContentConfig({
         include: '**/*.md',
         exclude: [
           'blog-arkisto/*.md',
+          'practices/**',
         ],
       },
 
@@ -24,6 +25,22 @@ export default defineContentConfig({
         alt: z.string(),
         ogImage: z.string(),
 
+      }),
+    }),
+    practices: defineCollection({
+      type: 'page',
+      source: {
+        include: 'practices/*.md',
+        exclude: ['practices/*.template.md', 'practices/_**.md'],
+      },
+
+      schema: z.object({
+        title: z.string(),
+        start: z.string(),
+        end: z.string(),
+        weekday: z.string(),
+        location: z.string(),
+        map: z.string(),
       }),
     }),
     data: defineCollection({

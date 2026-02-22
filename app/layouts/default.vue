@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <header class="sticky top-0 z-50 shadow bg-linear-to-r from-brand via-brand-dark to-[#271b1b]">
+    <header class="sticky top-0 z-50 shadow bg-linear-to-l dark:bg-linear-to-r from-brand via-brand-dark to-[#271b1b]">
       <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-1">
         <div class="flex items-center gap-2">
           <!-- Mobile hamburger -->
@@ -22,31 +22,14 @@
           >
             {{ computedSwitchLocalePath.label }}
           </NuxtLink>
-          <a
-            v-for="link in headerExternalLinks"
-            :key="link.label"
-            :href="link.url"
-            :aria-label="link.label"
-            target="_blank"
-            rel="noopener"
-            class="text-white hover:opacity-80 px-1"
-          >
-            <UIcon :name="link.icon" class="h-[1.1rem] w-[1.1rem] inline" aria-hidden />
+          <a href="https://instagram.com/sleepwalkersultimate" aria-label="Instagram" target="_blank" rel="noopener" class="flex items-center text-white hover:opacity-80 px-1">
+            <UIcon name="i-lucide-instagram" class="size-[1.1rem]" aria-hidden />
+          </a>
+          <a href="https://www.facebook.com/sleepwalkersultimate" aria-label="Facebook" target="_blank" rel="noopener" class="flex items-center text-white hover:opacity-80 px-1">
+            <UIcon name="i-lucide-facebook" class="size-[1.1rem]" aria-hidden />
           </a>
           <div class="border-l border-white/30 h-5 mx-1" />
-          <ClientOnly v-if="!colorMode?.forced">
-            <UButton
-              :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
-              color="neutral"
-              variant="ghost"
-              :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-              @click="isDark = !isDark"
-            />
-
-            <template #fallback>
-              <div class="size-8" />
-            </template>
-          </ClientOnly>
+          <UColorModeButton />
         </div>
       </div>
     </header>
@@ -78,23 +61,14 @@
           >
             {{ computedSwitchLocalePath.label }}
           </NuxtLink>
-          <a
-            v-for="link in headerExternalLinks"
-            :key="link.label"
-            :href="link.url"
-            :aria-label="link.label"
-            target="_blank"
-            rel="noopener"
-            class="text-inherit hover:opacity-80 px-1"
-          >
-            <UIcon :name="link.icon" class="h-[1.1rem] w-[1.1rem] inline" aria-hidden />
+          <a href="https://instagram.com/sleepwalkersultimate" aria-label="Instagram" target="_blank" rel="noopener" class="text-inherit hover:opacity-80 px-1">
+            <UIcon name="i-lucide-instagram" class="size-[1.1rem]" aria-hidden />
+          </a>
+          <a href="https://www.facebook.com/sleepwalkersultimate" aria-label="Facebook" target="_blank" rel="noopener" class="text-inherit hover:opacity-80 px-1">
+            <UIcon name="i-lucide-facebook" class="size-[1.1rem]" aria-hidden />
           </a>
           <div class="border-l border-gray-300 dark:border-gray-600 h-5 mx-1" />
-          <ClientOnly>
-            <button class="p-1 hover:opacity-80" :aria-label="`Toggle theme (${colorMode})`" @click="toggleColorMode">
-              <component :is="currentIcon" class="h-[1.1rem] w-[1.1rem]" />
-            </button>
-          </ClientOnly>
+          <UColorModeButton />
         </div>
 
         <Practices small />
@@ -208,19 +182,6 @@ const computedSwitchLocalePath = computed(() => {
 function localePath(path: string) {
   return `/${locale.value}${path.startsWith('/') ? path : `/${path}`}`
 }
-
-const headerExternalLinks = [
-  {
-    url: 'https://instagram.com/sleepwalkersultimate',
-    label: 'Instagram',
-    icon: 'i-lucide-instagram',
-  },
-  {
-    url: 'https://www.facebook.com/sleepwalkersultimate',
-    label: 'Facebook',
-    icon: 'i-lucide-facebook',
-  },
-]
 
 // Theme / color mode
 const colorMode = useColorMode()
