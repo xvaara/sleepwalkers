@@ -3,7 +3,7 @@ title: "🏡"
 ---
 # Sleepwalkers ultimate ry
 
-Tervetuloa harrastamaan seurassamme ultimate!
+Tervetuloa harrastamaan seurassamme ultimatea!
 
 ## Yhteystiedot
 
@@ -16,13 +16,13 @@ Tervetuloa harrastamaan seurassamme ultimate!
         <img src="/images/jss-logo.png" class="img-fluid" />
       ::::
       ::::column
-        JSS XIII
-        JSS vol. XIII järjestetään pe-su 6.-8.6.2025.
+        JSS XIV
+        JSS vol. XIV järjestetään pe-su 15.-17.5.2026.
 
         Turnaus
-        JSS on Jyväskylässä kesäkuun alussa järjestettävä ultimate-turnaus ja turnausareenana toimii vehkalahden kenttä. Ultimate-pelien lisäksi tarjolla on tietysti iltaohjelmaa, hyvää seuraa, ruokapalvelua, mukavaa yhdessäoloa ja todella hyvä Spiritti!
+        Jyväskylä Summer Start on nimensä mukaisesti Jyväskylässä kesän alussa järjestettävä ultimateturnaus ja turnausareenana toimii Viitaniemen kenttä. Ultimate-pelien lisäksi tarjolla on tietysti iltaohjelmaa, hyvää seuraa, ruokapalvelua, mukavaa yhdessäoloa ja todella hyvä Spiritti!
 
-        Jyväskylä Sleepwalker toivottaa tervetulleeksi Keski-Suomeen!
+        Jyväskylä Sleepwalkers toivottaa tervetulleeksi Keski-Suomeen!
       ::::
     :::
   ::
