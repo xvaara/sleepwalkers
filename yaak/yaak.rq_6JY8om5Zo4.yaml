@@ -1,0 +1,126 @@
+type: http_request
+model: http_request
+id: rq_6JY8om5Zo4
+createdAt: 2025-04-29T10:57:04.499622
+updatedAt: 2025-04-29T10:59:38.119147
+workspaceId: wk_qrThCqAE9z
+folderId: null
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers:
+- enabled: true
+  name: accept
+  value: text/json
+  id: wJeV98AYKp
+- enabled: false
+  name: accept-language
+  value: en-US,en;q=0.9
+  id: BJDyTeqk7u
+- enabled: false
+  name: cache-control
+  value: no-cache
+  id: Wqap7k9QFf
+- enabled: false
+  name: dnt
+  value: '1'
+  id: 94vtaXargz
+- enabled: false
+  name: pragma
+  value: no-cache
+  id: VCCXGyGj3U
+- enabled: false
+  name: priority
+  value: u=1, i
+  id: JWW9TFCaew
+- enabled: false
+  name: referer
+  value: https://www.instagram.com/sleepwalkersultimate/
+  id: DySNBeVkWr
+- enabled: false
+  name: sec-ch-prefers-color-scheme
+  value: dark
+  id: mM3ihgXIfm
+- enabled: false
+  name: sec-ch-ua
+  value: '"Chromium";v="135", "Not-A.Brand";v="8"'
+  id: qvh0ZPwTrm
+- enabled: false
+  name: sec-ch-ua-full-version-list
+  value: '"Chromium";v="135.0.7049.96", "Not-A.Brand";v="8.0.0.0"'
+  id: PheeAFUhCJ
+- enabled: false
+  name: sec-ch-ua-mobile
+  value: ?0
+  id: QKVRgjqbQj
+- enabled: false
+  name: sec-ch-ua-model
+  value: '""'
+  id: 2k9txc85IR
+- enabled: false
+  name: sec-ch-ua-platform
+  value: '"macOS"'
+  id: KDQnZwwp95
+- enabled: false
+  name: sec-ch-ua-platform-version
+  value: '"15.3.2"'
+  id: FUxB7jNFz4
+- enabled: false
+  name: sec-fetch-dest
+  value: empty
+  id: AKaN0m0F6g
+- enabled: false
+  name: sec-fetch-mode
+  value: cors
+  id: q4t2rW2VdB
+- enabled: false
+  name: sec-fetch-site
+  value: same-origin
+  id: Y3u6K2v7VA
+- enabled: false
+  name: user-agent
+  value: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+  id: 2MF0BseN3F
+- enabled: false
+  name: x-asbd-id
+  value: '359341'
+  id: N5y0CJWmdw
+- enabled: false
+  name: x-csrftoken
+  value: eea00yeDotbBcYDOg55VaNk1qgknB7rT
+  id: fzRq5wyE6h
+- enabled: true
+  name: x-ig-app-id
+  value: '936619743392459'
+  id: ypU8Wba5ni
+- enabled: false
+  name: x-ig-www-claim
+  value: '0'
+  id: rEQ822KNFU
+- enabled: false
+  name: x-requested-with
+  value: XMLHttpRequest
+  id: XpIHCDGpK0
+- enabled: false
+  name: x-web-session-id
+  value: xkzyeo:pj723b:fsekwr
+  id: iqi3yU5nW2
+- enabled: false
+  name: Cookie
+  value: ig_did=0C826C21-17C3-444A-ABB7-EBABD37214D7; datr=1jloZ7jOo-fknU6e1-fw46if; mid=Z2g51wAEAAHf_zxMRjUmTVSI21n0; wd=1490x1060; csrftoken=eea00yeDotbBcYDOg55VaNk1qgknB7rT
+  id: s9XWYmS8Vk
+- enabled: true
+  name: ''
+  value: ''
+  id: T7WrVetRHU
+method: GET
+name: ''
+sortPriority: -1745923700000.0
+url: https://www.instagram.com/api/v1/users/web_profile_info/
+urlParameters:
+- enabled: true
+  name: username
+  value: sleepwalkersultimate
+  id: null

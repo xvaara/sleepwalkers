@@ -1,0 +1,10 @@
+type: workspace
+model: workspace
+id: wk_qrThCqAE9z
+createdAt: 2025-04-29T10:48:23.465033
+updatedAt: 2025-04-29T12:50:31
+name: sleepwalkers
+description: ''
+settingValidateCertificates: true
+settingFollowRedirects: true
+settingRequestTimeout: 0

@@ -1,10 +1,31 @@
+/**
+ * Parse a date+time string as local time in Europe/Helsinki timezone.
+ */
+function parseHelsinkiDate(dateStr: string, timeStr: string): Date {
+  // Interpret the date/time as UTC initially
+  const utc = new Date(`${dateStr}T${timeStr}Z`)
+  // Determine Helsinki's UTC offset at this approximate point in time
+  const fmt = new Intl.DateTimeFormat('en', {
+    timeZone: 'Europe/Helsinki',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false,
+  })
+  const p = fmt.formatToParts(utc)
+  const v = (t: string) => Number(p.find(x => x.type === t)!.value)
+  const helsinkiAsUtc = Date.UTC(v('year'), v('month') - 1, v('day'), v('hour') % 24, v('minute'), v('second'))
+  const offsetMs = helsinkiAsUtc - utc.getTime()
+  // Subtract the offset so the naive local time is correctly placed in UTC
+  return new Date(utc.getTime() - offsetMs)
+}
+
 export async function getPracticesData(): Promise<object> {
   return fetch('https://jsw.nimenhuuto.com/calendar/csv').then(res => res.text()).then((data) => {
     const doc = parseCSV(data)
       .slice(1)
       .map(i => ({
         title: i[0],
-        date: new Date(`${i[1]}T${i[2]}+03:00`),
+        date: parseHelsinkiDate(i[1], i[2]),
         location: i[3],
         url: i[4].split('\n')[0].trim(),
         description: i[4].replace(/\</g, '&lt;').replace(/\>/g, '&gt;').split('\n').slice(1).join('<br>'),

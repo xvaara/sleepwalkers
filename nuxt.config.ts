@@ -1,7 +1,7 @@
 import { readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { getIgData } from './utils/ig'
-import { getPracticesData } from './utils/practices'
+import { getIgData } from './app/utils/ig'
+import { getPracticesData } from './app/utils/practices'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -63,7 +63,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    strictNuxtContentPaths: true,
+    // strictNuxtContentPaths: true,
   },
   site: {
     url: 'https://sleepwalkers.fi',
@@ -175,7 +175,7 @@ export default defineNuxtConfig({
         scss: {
           api: 'modern-compiler',
           charset: false,
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'if-function'],
         },
       },
     },
