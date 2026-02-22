@@ -116,6 +116,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@vueuse/nuxt',
+    'nuxt-studio',
   ],
   css: ['~/assets/bootstrap.scss'],
   i18n: {
@@ -182,6 +183,15 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  studio: {
+    repository: {
+      provider: 'github', // 'github' or 'gitlab'
+      owner: 'xvaara',
+      repo: 'sleepwalkers',
+      branch: 'main',
+      private: false
+    }
   },
   compatibilityDate: '2025-04-29',
 })
