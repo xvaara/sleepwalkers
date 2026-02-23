@@ -36,9 +36,10 @@ export default defineContentConfig({
 
       schema: z.object({
         title: z.string(),
+        title_en: z.string().optional(),
         start: z.string(),
         end: z.string(),
-        weekday: z.string(),
+        weekday: z.number(),
         location: z.string(),
         map: z.string(),
       }),

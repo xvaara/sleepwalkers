@@ -15,7 +15,7 @@
           <div class="flex flex-col" :class="(index % 2) === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'">
             <div class="w-full lg:w-1/2 p-4">
               <h4>
-                {{ practice.weekday }} – {{ practice.title }}
+                {{ weekdayName(practice.weekday) }} – {{ locale === 'en' && practice.title_en ? practice.title_en : practice.title }}
               </h4>
               <p>{{ practice.location }}</p>
               <ContentRenderer :value="practice" />
@@ -88,17 +88,24 @@ const allEvents = pdata.map(item => ({
 })).filter(item => item.date > new Date())
   .sort((a, b) => +a.date - +b.date)
 
-function getHelsinkiWeekday(date: Date): string {
-  return date.toLocaleDateString('fi-FI', { weekday: 'long', timeZone: 'Europe/Helsinki' })
+function getHelsinkiISOWeekday(date: Date): number {
+  const d = new Date(date.toLocaleDateString('en-CA', { timeZone: 'Europe/Helsinki' }))
+  return d.getDay() === 0 ? 7 : d.getDay()
 }
 
 function getHelsinkiTime(date: Date): string {
   return date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Helsinki' }).replace('.', ':')
 }
 
-function matchingEvents(practice: { weekday: string, start: string }) {
+function weekdayName(isoWeekday: number): string {
+  // Create a known Monday (2024-01-01) and offset to get the desired weekday
+  const base = new Date(2024, 0, isoWeekday) // Jan 1 2024 is Monday (ISO 1)
+  return base.toLocaleDateString(locale.value, { weekday: 'long' })
+}
+
+function matchingEvents(practice: { weekday: number, start: string }) {
   return allEvents.filter((event) => {
-    return getHelsinkiWeekday(event.date) === practice.weekday.toLowerCase()
+    return getHelsinkiISOWeekday(event.date) === practice.weekday
       && getHelsinkiTime(event.date) === practice.start
   })
 }
