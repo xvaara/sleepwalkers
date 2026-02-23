@@ -64,11 +64,11 @@ Catches template errors like:
 **`verbatimModuleSyntax: true`** - Enforces explicit `type` imports:
 
 ```ts
-// ❌ May cause issues with bundlers
-import { User } from './types'
-
 // ✅ Explicit type import
 import type { User } from './types'
+
+// ❌ May cause issues with bundlers
+import { User } from './types'
 ```
 
 ## Component Type Helpers
@@ -76,7 +76,7 @@ import type { User } from './types'
 **Extract props type from component:**
 
 ```ts
-import type { ComponentProps, ComponentSlots, ComponentEmits } from 'vue-component-type-helpers'
+import type { ComponentEmits, ComponentProps, ComponentSlots } from 'vue-component-type-helpers'
 import MyComponent from './MyComponent.vue'
 
 type Props = ComponentProps<typeof MyComponent>
@@ -154,11 +154,11 @@ const onUpdate = (value: string) => { ... }
 **Forgetting to import types explicitly:**
 
 ```ts
-// ❌ Runtime import of type-only
-import { User } from './types'
-
 // ✅ Type-only import
 import type { User } from './types'
+
+// ❌ Runtime import of type-only
+import { User } from './types'
 ```
 
 **Not using `as const` for literal types:**

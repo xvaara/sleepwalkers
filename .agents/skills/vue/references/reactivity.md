@@ -31,15 +31,17 @@ function increment() {
 </script>
 
 <template>
-  <button @click="increment">{{ count }}</button>
+  <button @click="increment">
+    {{ count }}
+  </button>
 </template>
 ```
 
 ### Typing refs
 
 ```ts
-import { ref } from 'vue'
 import type { Ref } from 'vue'
+import { ref } from 'vue'
 
 // Type inference
 const year = ref(2020) // Ref<number>
@@ -78,13 +80,13 @@ state.count++ // reactive
 3. **Destructuring loses reactivity** - use `toRefs()` instead
 
 ```ts
+// ✅ Use toRefs
+import { toRefs } from 'vue'
+
 const state = reactive({ count: 0 })
 
 // ❌ Loses reactivity
 let { count } = state
-
-// ✅ Use toRefs
-import { toRefs } from 'vue'
 const { count } = toRefs(state)
 ```
 
@@ -114,7 +116,7 @@ Use `shallowRef()` or `shallowReactive()` to opt out of deep reactivity for perf
 DOM updates are batched and asynchronous. Use `nextTick()` to wait for updates:
 
 ```ts
-import { ref, nextTick } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const count = ref(0)
 
@@ -146,7 +148,7 @@ console.log(books[0].value) // Need .value
 Derive values from reactive state with automatic caching. Only re-evaluates when dependencies change.
 
 ```ts
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const firstName = ref('John')
 const lastName = ref('Doe')
@@ -203,10 +205,10 @@ const x = ref(0)
 const obj = reactive({ count: 0 })
 
 // Single ref
-watch(x, (newX) => console.log(newX))
+watch(x, newX => console.log(newX))
 
 // Getter function
-watch(() => obj.count, (count) => console.log(count))
+watch(() => obj.count, count => console.log(count))
 
 // Multiple sources
 watch([x, () => obj.count], ([newX, newCount]) => {
@@ -218,10 +220,10 @@ watch([x, () => obj.count], ([newX, newCount]) => {
 
 ```ts
 watch(source, callback, {
-  immediate: true,  // Run immediately on creation
-  deep: true,       // Watch nested properties
-  once: true,       // Trigger only once (3.4+)
-  flush: 'post'     // Run after DOM update
+  immediate: true, // Run immediately on creation
+  deep: true, // Watch nested properties
+  once: true, // Trigger only once (3.4+)
+  flush: 'post' // Run after DOM update
 })
 ```
 
@@ -255,7 +257,7 @@ watchEffect(async () => {
 Cancel stale async operations:
 
 ```ts
-import { watch, onWatcherCleanup } from 'vue'
+import { onWatcherCleanup, watch } from 'vue'
 
 watch(id, async (newId) => {
   const controller = new AbortController()

@@ -244,7 +244,9 @@ const { enabled } = useContentPreview()
 
 <template>
   <div v-if="enabled" class="fixed top-0 left-0 right-0 bg-yellow-500 text-center py-1 z-50">
-    Preview Mode - <button @click="navigateTo(useRoute().fullPath.replace('?preview', ''))">Exit</button>
+    Preview Mode - <button @click="navigateTo(useRoute().fullPath.replace('?preview', ''))">
+      Exit
+    </button>
   </div>
 </template>
 ```

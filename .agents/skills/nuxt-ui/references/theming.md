@@ -86,7 +86,9 @@ export default defineAppConfig({
 ```
 
 ```vue
-<UButton color="tertiary">Custom Color</UButton>
+<UButton color="tertiary">
+Custom Color
+</UButton>
 ```
 
 ## CSS Variables
@@ -191,10 +193,14 @@ export default defineAppConfig({
 
 ```vue
 <!-- ui prop overrides slots -->
-<UButton :ui="{ base: 'font-mono' }">Custom</UButton>
+<UButton :ui="{ base: 'font-mono' }">
+Custom
+</UButton>
 
 <!-- class prop overrides root/base slot -->
-<UButton class="rounded-none">Square</UButton>
+<UButton class="rounded-none">
+Square
+</UButton>
 ```
 
 ## Matching Theme Structure in app.config
@@ -221,7 +227,7 @@ export default {
 ```ts
 ui: {
   button: {
-    slots: { base: 'font-bold' }  // ✅ Match slots structure
+    slots: { base: 'font-bold' } // ✅ Match slots structure
   }
 }
 ```
@@ -242,7 +248,7 @@ export default {
 ```ts
 ui: {
   container: {
-    base: 'max-w-lg'  // ✅ Match flat structure
+    base: 'max-w-lg' // ✅ Match flat structure
   }
 }
 ```
@@ -253,14 +259,14 @@ ui: {
 // ❌ WRONG - Don't use slots for flat-base components
 ui: {
   container: {
-    slots: { base: 'max-w-lg' }  // TypeScript error!
+    slots: { base: 'max-w-lg' } // TypeScript error!
   }
 }
 
 // ❌ WRONG - Don't use flat for slots-based components
 ui: {
   button: {
-    base: 'font-bold'  // Won't work correctly
+    base: 'font-bold' // Won't work correctly
   }
 }
 ```
@@ -310,6 +316,7 @@ colorMode.preference = 'dark' // 'light', 'dark', 'system'
 
 ```vue
 <UColorModeButton /> <!-- Toggle button -->
+
 <UColorModeSelect /> <!-- Dropdown select -->
 ```
 

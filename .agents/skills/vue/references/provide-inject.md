@@ -107,7 +107,7 @@ Keep mutations in the provider, expose update functions:
 ```vue
 <!-- Provider.vue -->
 <script setup lang="ts">
-import { provide, ref, readonly } from 'vue'
+import { provide, readonly, ref } from 'vue'
 
 const location = ref('North Pole')
 

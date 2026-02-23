@@ -30,11 +30,11 @@ useRobotsRule('noindex, nofollow')
 
 // Object syntax with AI directives
 useRobotsRule({
-  noindex: true,
-  nofollow: true,
-  noai: true,           // Block AI training
-  noimageai: true,      // Block AI image training
-  'max-snippet': 150,   // Preview controls
+  'noindex': true,
+  'nofollow': true,
+  'noai': true, // Block AI training
+  'noimageai': true, // Block AI image training
+  'max-snippet': 150, // Preview controls
   'max-image-preview': 'large'
 })
 ```
@@ -83,9 +83,9 @@ export default defineNuxtConfig({
 ### Dynamic URLs via API
 
 ```ts
+import type { SitemapUrlInput } from '#sitemap/types'
 // server/api/__sitemap__/urls.ts
 import { defineSitemapEventHandler } from '#imports'
-import type { SitemapUrlInput } from '#sitemap/types'
 
 export default defineSitemapEventHandler(async () => {
   const posts = await $fetch('/api/posts')

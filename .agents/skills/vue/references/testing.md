@@ -164,8 +164,8 @@ global.fetch = vi.fn(() =>
 Mock `useRoute` and `useRouter` for component tests:
 
 ```ts
-import { vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { vi } from 'vitest'
 
 vi.mock('vue-router', () => ({
   useRoute: vi.fn(() => ({

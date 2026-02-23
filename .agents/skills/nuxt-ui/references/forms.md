@@ -79,7 +79,8 @@ const options = [
 <USelectMenu
   v-model="selected"
   :options="options"
-  clear                <!-- Add clear button (v4.4+) -->
+  clear                <!-- Add clear button (v4.4+) --
+>
   :viewport-ref="ref"  <!-- For infinite scroll (v4.4+) -->
 />
 ```
@@ -102,7 +103,7 @@ const features = ref([])
     v-model="plan"
     :items="[
       { label: 'Free', value: 'free', description: '$0/mo' },
-      { label: 'Pro', value: 'pro', description: '$10/mo' }
+      { label: 'Pro', value: 'pro', description: '$10/mo' },
     ]"
   />
 
@@ -111,7 +112,7 @@ const features = ref([])
     v-model="features"
     :items="[
       { label: 'Dark mode', value: 'dark' },
-      { label: 'Notifications', value: 'notifications' }
+      { label: 'Notifications', value: 'notifications' },
     ]"
   />
 </template>
@@ -157,7 +158,9 @@ async function onSubmit() {
       <UInput v-model="state.password" type="password" />
     </UFormField>
 
-    <UButton type="submit">Submit</UButton>
+    <UButton type="submit">
+      Submit
+    </UButton>
   </UForm>
 </template>
 ```
@@ -192,7 +195,8 @@ const state = reactive<Partial<Schema>>({
 
 ```vue
 <UFormField
-  name="email"              <!-- Field name (matches state key) -->
+  name="email"              <!-- Field name (matches state key) --
+>
   label="Email"             <!-- Label text -->
   description="Your email"  <!-- Help text -->
   hint="Optional"           <!-- Right-aligned hint -->
@@ -237,7 +241,9 @@ const { files, open, reset } = useFileUpload()
 
 <template>
   <UFileUpload v-model="files" accept="image/*" multiple :max-files="5">
-    <UButton @click="open">Upload</UButton>
+    <UButton @click="open">
+      Upload
+    </UButton>
   </UFileUpload>
 </template>
 ```

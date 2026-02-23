@@ -36,7 +36,9 @@ const { scrollYProgress } = useScroll()
 const y = useTransform(scrollYProgress, [0, 1], [0, -200])
 </script>
 
-<motion.div :style="{ y }">Parallax content</motion.div>
+<motion.div :style="{ y }">
+Parallax content
+</motion.div>
 ```
 
 ```vue
@@ -172,7 +174,7 @@ const words = text.split(' ')
 ```vue
 <!-- Gradient follow cursor -->
 <script setup>
-import { motion, useMotionValue, useMotionTemplate } from 'motion-v'
+import { motion, useMotionTemplate, useMotionValue } from 'motion-v'
 
 const x = useMotionValue(0)
 const y = useMotionValue(0)

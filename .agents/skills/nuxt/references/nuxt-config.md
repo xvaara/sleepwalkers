@@ -114,7 +114,8 @@ const config = useSafeRuntimeConfig()
 
 ```ts
 // ❌ Don't do this with nuxt-safe-runtime-config
-if (!config.databaseUrl) throw new Error('Missing DATABASE_URL')
+if (!config.databaseUrl)
+  throw new Error('Missing DATABASE_URL')
 
 // ✅ Schema validation handles it automatically
 // If env var is missing, build fails with detailed error
@@ -246,10 +247,10 @@ Use `isr` for incremental static regeneration:
 ```ts
 export default defineNuxtConfig({
   routeRules: {
-    '/': { prerender: true },        // Static at build time
-    '/**': { isr: 60 },              // Regenerate every 60s
-    '/package/**': { isr: 60 },      // ISR for dynamic routes
-    '/search': { isr: false, cache: false },  // No cache
+    '/': { prerender: true }, // Static at build time
+    '/**': { isr: 60 }, // Regenerate every 60s
+    '/package/**': { isr: 60 }, // ISR for dynamic routes
+    '/search': { isr: false, cache: false }, // No cache
   }
 })
 ```
@@ -302,7 +303,8 @@ import { provider } from 'std-env'
 export default defineNuxtModule({
   meta: { name: 'vercel-cache' },
   setup(_, nuxt) {
-    if (provider !== 'vercel') return
+    if (provider !== 'vercel')
+      return
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.storage ||= {}

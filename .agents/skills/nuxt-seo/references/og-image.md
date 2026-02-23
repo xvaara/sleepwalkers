@@ -55,13 +55,17 @@ Create in `components/OgImage/`:
 ```vue
 <!-- components/OgImage/Blog.vue -->
 <script setup lang="ts">
-defineProps<{ title: string; author: string }>()
+defineProps<{ title: string, author: string }>()
 </script>
 
 <template>
   <div class="w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-blue-500 to-purple-600 p-12">
-    <h1 class="text-6xl font-bold text-white text-center">{{ title }}</h1>
-    <p class="text-2xl text-white/80 mt-4">By {{ author }}</p>
+    <h1 class="text-6xl font-bold text-white text-center">
+      {{ title }}
+    </h1>
+    <p class="text-2xl text-white/80 mt-4">
+      By {{ author }}
+    </p>
   </div>
 </template>
 ```
@@ -102,7 +106,7 @@ export default defineNuxtConfig({
       component: 'NuxtSeo',
       width: 1200,
       height: 600,
-      cacheMaxAgeSeconds: 60 * 60 * 24 * 3  // 3 days
+      cacheMaxAgeSeconds: 60 * 60 * 24 * 3 // 3 days
     },
     // For static sites
     zeroRuntime: true

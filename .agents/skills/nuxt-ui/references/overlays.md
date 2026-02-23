@@ -23,7 +23,9 @@ function showToast() {
 </script>
 
 <template>
-  <UButton @click="showToast">Show Toast</UButton>
+  <UButton @click="showToast">
+    Show Toast
+  </UButton>
 </template>
 ```
 
@@ -78,7 +80,9 @@ const isOpen = ref(false)
 </script>
 
 <template>
-  <UButton @click="isOpen = true">Open Modal</UButton>
+  <UButton @click="isOpen = true">
+    Open Modal
+  </UButton>
 
   <UModal v-model:open="isOpen">
     <template #header>
@@ -88,8 +92,12 @@ const isOpen = ref(false)
     <p>Modal content goes here...</p>
 
     <template #footer>
-      <UButton variant="ghost" @click="isOpen = false">Cancel</UButton>
-      <UButton @click="save">Save</UButton>
+      <UButton variant="ghost" @click="isOpen = false">
+        Cancel
+      </UButton>
+      <UButton @click="save">
+        Save
+      </UButton>
     </template>
   </UModal>
 </template>
@@ -100,7 +108,8 @@ const isOpen = ref(false)
 ```vue
 <UModal
   v-model:open="isOpen"
-  title="Modal Title"          <!-- Alternative to #header slot -->
+  title="Modal Title"          <!-- Alternative to #header slot --
+>
   description="Subtitle"       <!-- Below title -->
   :close="true"                <!-- Show close button -->
   :close-icon="'i-heroicons-x-mark'"
@@ -144,7 +153,9 @@ const isOpen = ref(false)
 </script>
 
 <template>
-  <UButton @click="isOpen = true">Open Slideover</UButton>
+  <UButton @click="isOpen = true">
+    Open Slideover
+  </UButton>
 
   <USlideover v-model:open="isOpen" title="Settings" side="right">
     <div class="p-4">
@@ -161,7 +172,8 @@ const isOpen = ref(false)
   v-model:open="isOpen"
   title="Title"
   description="Subtitle"
-  side="right"              <!-- left, right, top, bottom -->
+  side="right"              <!-- left, right, top, bottom --
+>
   :overlay="true"
   :transition="true"
   :prevent-close="false"
@@ -178,7 +190,9 @@ const isOpen = ref(false)
 </script>
 
 <template>
-  <UButton @click="isOpen = true">Open Drawer</UButton>
+  <UButton @click="isOpen = true">
+    Open Drawer
+  </UButton>
 
   <UDrawer v-model:open="isOpen">
     <div class="p-4">
@@ -195,7 +209,8 @@ const isOpen = ref(false)
   v-model:open="isOpen"
   title="Drawer Title"
   description="Subtitle"
-  handle                     <!-- Show drag handle -->
+  handle                     <!-- Show drag handle --
+>
   :should-scale-background="true"
   :close-threshold="0.25"    <!-- Swipe threshold to close -->
 >
@@ -220,7 +235,8 @@ const isOpen = ref(false)
 ```vue
 <UPopover
   :open="isOpen"
-  side="bottom"              <!-- top, right, bottom, left -->
+  side="bottom"              <!-- top, right, bottom, left --
+>
   align="center"             <!-- start, center, end -->
   :arrow="true"
   :delay="{ open: 0, close: 0 }"
@@ -270,7 +286,7 @@ const items = [
   { label: 'New', children: [
     { label: 'File', click: () => {} },
     { label: 'Folder', click: () => {} }
-  ]},
+  ] },
   { label: 'Delete' }
 ]
 </script>
@@ -330,7 +346,8 @@ const groups = [{
   v-model:open="isOpen"
   :groups="groups"
   placeholder="Search..."
-  size="md"              <!-- Size: sm, md, lg (v4.4+) -->
+  size="md"              <!-- Size: sm, md, lg (v4.4+) --
+>
   :input="{ /* props */ }"  <!-- Custom input props (v4.4+) -->
 />
 ```

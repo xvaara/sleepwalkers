@@ -211,7 +211,7 @@ export default defineNuxtConfig({})
 ```vue
 <!-- components/content/Alert.vue -->
 <template>
-  <div :class="['alert', `alert-${type}`]">
+  <div class="alert" :class="[`alert-${type}`]">
     <slot />
   </div>
 </template>

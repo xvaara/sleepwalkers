@@ -9,7 +9,7 @@ Setting up `content.config.ts`, defining collection schemas, or configuring cont
 ```ts
 // content.config.ts
 import { defineCollection, defineContentConfig } from '@nuxt/content'
-import { z } from 'zod'  // Import z from 'zod' directly (not from @nuxt/content)
+import { z } from 'zod' // Import z from 'zod' directly (not from @nuxt/content)
 
 export default defineContentConfig({
   collections: {

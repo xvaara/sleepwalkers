@@ -356,4 +356,3 @@
 | watchTriggerable | Watch that can be triggered manually | [watch-triggerable.md](../composables/watch-triggerable.md) |
 | watchWithFilter | with additional EventFilter control. | [watch-with-filter.md](../composables/watch-with-filter.md) |
 | whenever | Shorthand for watching value to be truthy. | [whenever.md](../composables/whenever.md) |
-

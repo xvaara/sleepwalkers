@@ -69,7 +69,8 @@ export default defineNuxtRouteMiddleware((to) => {
   // Check if route is in admin group
   if (to.meta.groups?.includes('admin')) {
     const auth = useAuthStore()
-    if (!auth.isAdmin) return navigateTo('/')
+    if (!auth.isAdmin)
+      return navigateTo('/')
   }
 })
 ```
@@ -83,8 +84,12 @@ Parent route = layout for nested routes:
 <template>
   <div class="users-layout">
     <nav>
-      <NuxtLink to="/users">All Users</NuxtLink>
-      <NuxtLink to="/users/create">Create User</NuxtLink>
+      <NuxtLink to="/users">
+        All Users
+      </NuxtLink>
+      <NuxtLink to="/users/create">
+        Create User
+      </NuxtLink>
     </nav>
     <NuxtPage />
   </div>
@@ -108,7 +113,7 @@ pages/
 <script setup lang="ts">
 definePage({
   name: 'user-profile',
-  path: '/profile/:userId',  // Override default path
+  path: '/profile/:userId', // Override default path
   alias: ['/me', '/profile'],
   meta: {
     requiresAuth: true,
@@ -195,7 +200,8 @@ const user = useUser()
 // Switch layout based on auth state
 if (!user.value) {
   setPageLayout('guest')
-} else {
+}
+else {
   setPageLayout('dashboard')
 }
 

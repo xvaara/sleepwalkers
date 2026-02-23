@@ -66,7 +66,7 @@ const opacity = useTransform(x, [0, 100], [1, 0])
 const scale = useTransform(x, [0, 100], [1, 2])
 
 // Custom transform function
-const rotate = useTransform(x, (value) => `${value}deg`)
+const rotate = useTransform(x, value => `${value}deg`)
 
 // Combine multiple values
 const combined = useTransform([x, opacity], ([x, opacity]) => {
@@ -93,7 +93,7 @@ Create template strings from motion values:
 
 ```vue
 <script setup>
-import { useMotionValue, useMotionTemplate } from 'motion-v'
+import { useMotionTemplate, useMotionValue } from 'motion-v'
 
 const x = useMotionValue(0)
 const y = useMotionValue(0)
@@ -113,7 +113,7 @@ Track scroll progress of window or element:
 
 ```vue
 <script setup>
-import { useScroll, useTransform, motion } from 'motion-v'
+import { motion, useScroll, useTransform } from 'motion-v'
 
 // Window scroll
 const { scrollX, scrollY, scrollXProgress, scrollYProgress } = useScroll()
@@ -128,7 +128,7 @@ const { scrollYProgress: containerProgress } = useScroll({
 const targetRef = ref<HTMLElement>()
 const { scrollYProgress: targetProgress } = useScroll({
   target: targetRef,
-  offset: ['start end', 'end start'],  // When tracking starts/ends
+  offset: ['start end', 'end start'], // When tracking starts/ends
 })
 
 // Transform scroll to animation values
@@ -149,9 +149,9 @@ offset: ['start end', 'end start']
 // Second: container position relative to viewport
 
 // Common patterns:
-['start end', 'end start']     // Element enters bottom, exits top
-['start start', 'end start']   // Pin at top while scrolling
-['center center', 'end start'] // Centered animation
+  ['start end', 'end start'] // Element enters bottom, exits top
+  ['start start', 'end start'] // Pin at top while scrolling
+  ['center center', 'end start'] // Centered animation
 ```
 
 ## useInView
@@ -164,18 +164,21 @@ import { useInView } from 'motion-v'
 
 const ref = ref<HTMLElement>()
 const isInView = useInView(ref, {
-  once: true,           // Only trigger once
-  amount: 0.5,          // 50% visible to trigger
-  margin: '-100px',     // Shrink viewport detection
+  once: true, // Only trigger once
+  amount: 0.5, // 50% visible to trigger
+  margin: '-100px', // Shrink viewport detection
 })
 
 watch(isInView, (inView) => {
-  if (inView) console.log('Element visible')
+  if (inView)
+    console.log('Element visible')
 })
 </script>
 
 <template>
-  <div ref="ref">Tracked element</div>
+  <div ref="ref">
+    Tracked element
+  </div>
 </template>
 ```
 
@@ -185,7 +188,7 @@ Run callback every frame with delta time:
 
 ```vue
 <script setup>
-import { useMotionValue, useAnimationFrame } from 'motion-v'
+import { useAnimationFrame, useMotionValue } from 'motion-v'
 
 const rotation = useMotionValue(0)
 
@@ -197,7 +200,9 @@ useAnimationFrame((time, delta) => {
 </script>
 
 <template>
-  <motion.div :style="{ rotate: rotation }">Spinning</motion.div>
+  <motion.div :style="{ rotate: rotation }">
+    Spinning
+  </motion.div>
 </template>
 ```
 
@@ -211,13 +216,13 @@ import { animate } from 'motion-v'
 // Animate value
 const controls = animate(0, 100, {
   duration: 0.5,
-  onUpdate: (latest) => console.log(latest),
+  onUpdate: latest => console.log(latest),
   onComplete: () => console.log('done'),
 })
 
 // Control animation
 controls.stop()
-controls.time = 0.25  // Seek to 25%
+controls.time = 0.25 // Seek to 25%
 
 // Animate motion value
 const x = useMotionValue(0)
@@ -243,15 +248,15 @@ import { animate, stagger } from 'motion-v'
 const elements = document.querySelectorAll('.item')
 
 animate(elements, { opacity: 1, y: 0 }, {
-  delay: stagger(0.1),  // 0.1s between each
+  delay: stagger(0.1), // 0.1s between each
   duration: 0.5,
 })
 
 // Custom stagger
 animate(elements, { opacity: 1 }, {
   delay: stagger(0.1, {
-    start: 0.5,           // Start delay
-    from: 'center',       // 'first' | 'last' | 'center' | number
+    start: 0.5, // Start delay
+    from: 'center', // 'first' | 'last' | 'center' | number
     ease: 'easeOut',
   }),
 })
@@ -263,7 +268,7 @@ Track velocity of motion value:
 
 ```vue
 <script setup>
-import { useMotionValue, useVelocity, useTransform } from 'motion-v'
+import { useMotionValue, useTransform, useVelocity } from 'motion-v'
 
 const x = useMotionValue(0)
 const xVelocity = useVelocity(x)

@@ -77,8 +77,10 @@ Type scroll behavior function:
 import type { RouterScrollBehavior } from 'vue-router'
 
 const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
-  if (savedPosition) return savedPosition
-  if (to.hash) return { el: to.hash, behavior: 'smooth' }
+  if (savedPosition)
+    return savedPosition
+  if (to.hash)
+    return { el: to.hash, behavior: 'smooth' }
   return { top: 0 }
 }
 
@@ -132,7 +134,8 @@ const routes = [
     path: '/admin',
     component: AdminPage,
     beforeEnter: (to: RouteLocationNormalized) => {
-      if (!hasAdminRole()) return { name: 'forbidden' }
+      if (!hasAdminRole())
+        return { name: 'forbidden' }
     },
   },
 ]
@@ -144,10 +147,10 @@ Common route types:
 
 ```ts
 import type {
-  RouteLocationNormalized,     // Resolved route (after navigation)
+  RouteLocationNormalized, // Resolved route (after navigation)
   RouteLocationNormalizedLoaded, // Current route (from useRoute)
-  RouteLocationRaw,            // Input to router.push()
-  RouteRecordRaw,              // Route config definition
+  RouteLocationRaw, // Input to router.push()
+  RouteRecordRaw, // Route config definition
 } from 'vue-router'
 ```
 

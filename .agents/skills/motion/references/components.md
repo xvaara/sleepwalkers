@@ -90,7 +90,7 @@ Animation when component unmounts. Requires `AnimatePresence`:
 
 ```vue
 <script setup>
-import { motion, AnimatePresence } from 'motion-v'
+import { AnimatePresence, motion } from 'motion-v'
 </script>
 
 <template>
@@ -158,7 +158,8 @@ Animation while element is being dragged:
 
 ```vue
 <motion.div
-  drag              <!-- Enable drag on both axes -->
+  drag              <!-- Enable drag on both axes --
+>
   drag="x"          <!-- Constrain to x-axis -->
   drag="y"          <!-- Constrain to y-axis -->
   :dragConstraints="{ top: -50, left: -50, right: 50, bottom: 50 }"
@@ -186,10 +187,10 @@ Animation when element enters viewport:
 
 ```ts
 interface ViewportOptions {
-  once?: boolean       // Animate only first time (default: false)
-  amount?: number | 'some' | 'all'  // Visibility threshold (default: 'some')
-  margin?: string      // Rootmargin (e.g., '-100px')
-  root?: Element       // Scroll container (default: window)
+  once?: boolean // Animate only first time (default: false)
+  amount?: number | 'some' | 'all' // Visibility threshold (default: 'some')
+  margin?: string // Rootmargin (e.g., '-100px')
+  root?: Element // Scroll container (default: window)
 }
 ```
 
@@ -209,7 +210,9 @@ Layout modes:
 
 ```vue
 <motion.div layout />           <!-- Animate position and size -->
+
 <motion.div layout="position" /> <!-- Position only -->
+
 <motion.div layout="size" />     <!-- Size only -->
 ```
 
@@ -227,7 +230,7 @@ const selected = ref<string | null>(null)
     <motion.div
       v-for="item in items"
       :key="item.id"
-      :layoutId="item.id"
+      :layout-id="item.id"
       @click="selected = item.id"
     />
   </div>
@@ -235,7 +238,7 @@ const selected = ref<string | null>(null)
   <AnimatePresence>
     <motion.div
       v-if="selected"
-      :layoutId="selected"
+      :layout-id="selected"
       class="expanded"
     />
   </AnimatePresence>
@@ -248,7 +251,7 @@ Sync layout animations across components:
 
 ```vue
 <script setup>
-import { motion, LayoutGroup } from 'motion-v'
+import { LayoutGroup, motion } from 'motion-v'
 </script>
 
 <template>
@@ -337,7 +340,7 @@ Animate components as they mount/unmount:
 
 ```vue
 <script setup>
-import { motion, AnimatePresence } from 'motion-v'
+import { AnimatePresence, motion } from 'motion-v'
 </script>
 
 <template>
@@ -356,7 +359,9 @@ import { motion, AnimatePresence } from 'motion-v'
 
 ```vue
 <AnimatePresence mode="sync" />   <!-- Default: animate simultaneously -->
+
 <AnimatePresence mode="wait" />   <!-- Wait for exit before enter -->
+
 <AnimatePresence mode="popLayout" /> <!-- Pop exiting from layout flow -->
 ```
 
@@ -366,7 +371,8 @@ import { motion, AnimatePresence } from 'motion-v'
 <motion.div
   @animationStart="onStart"
   @animationComplete="onComplete"
-  @update="onUpdate"              <!-- Called every frame -->
+  @update="onUpdate"              <!-- Called every frame --
+>
   @hoverStart="onHoverStart"
   @hoverEnd="onHoverEnd"
   @pressStart="onPressStart"

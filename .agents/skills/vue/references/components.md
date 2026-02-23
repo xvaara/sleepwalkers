@@ -114,7 +114,7 @@ const title = defineModel<string>()
 const [title, modifiers] = defineModel<string>({
   default: 'default value',
   required: true,
-  get: (value) => value.trim(),
+  get: value => value.trim(),
   set: (value) => {
     if (modifiers.capitalize) {
       return value.charAt(0).toUpperCase() + value.slice(1)
@@ -189,7 +189,7 @@ Use `useTemplateRef()` for type-safe template references with IDE support:
 
 ```vue
 <script setup lang="ts">
-import { useTemplateRef, onMounted } from 'vue'
+import { onMounted, useTemplateRef } from 'vue'
 
 const input = useTemplateRef<HTMLInputElement>('my-input')
 
@@ -294,7 +294,7 @@ Teleport to elements rendered later in the same cycle:
   </Teleport>
 
   <!-- This renders after, but Teleport waits -->
-  <div id="late-div"></div>
+  <div id="late-div" />
 </template>
 ```
 

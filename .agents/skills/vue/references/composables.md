@@ -72,7 +72,7 @@ export function useEventListener(target: EventTarget, event: string, handler: Fu
 **Watcher cleanup (Vue 3.5+):**
 
 ```ts
-import { watch, onWatcherCleanup } from 'vue'
+import { onWatcherCleanup, watch } from 'vue'
 
 export function usePolling(url: Ref<string>) {
   watch(url, (newUrl) => {
@@ -300,7 +300,8 @@ watchEffect(() => {
 
 // ✅ Correct - use explicit watch for conditional deps
 watch([condition, dep], ([cond, d]) => {
-  if (cond) console.log(d)
+  if (cond)
+    console.log(d)
 })
 ```
 

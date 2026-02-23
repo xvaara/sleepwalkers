@@ -172,40 +172,28 @@ const { data } = await useAsyncData('users', async () => {
 // Later: controller.abort() to cancel
 
 // Custom cache logic with getCachedData
-const { data } = await useAsyncData('users',
-  async () => $fetch('/api/users'),
-  {
-    getCachedData: (key) => {
-      // Return cached data or null/undefined to trigger fetch
-      const cached = useNuxtData(key)
-      return cached.data.value
-    }
+const { data } = await useAsyncData('users', async () => $fetch('/api/users'), {
+  getCachedData: (key) => {
+    // Return cached data or null/undefined to trigger fetch
+    const cached = useNuxtData(key)
+    return cached.data.value
   }
-)
+})
 
 // Deep reactivity for nested objects
 // Default is shallow in Nuxt 4 (was deep in Nuxt 3)
-const { data } = await useAsyncData('user',
-  async () => $fetch('/api/user'),
-  {
-    deep: true // Makes nested properties reactive
-  }
-)
+const { data } = await useAsyncData('user', async () => $fetch('/api/user'), {
+  deep: true // Makes nested properties reactive
+})
 
 // Deduplication strategies (Nuxt 4.2+)
-const { data } = await useAsyncData('users',
-  async () => $fetch('/api/users'),
-  {
-    dedupe: 'cancel' // Cancel existing requests when new one starts
-    // dedupe: 'defer' // Prevent new requests while one is pending
-  }
-)
+const { data } = await useAsyncData('users', async () => $fetch('/api/users'), {
+  dedupe: 'cancel' // Cancel existing requests when new one starts
+  // dedupe: 'defer' // Prevent new requests while one is pending
+})
 
 // Manual cancellation via execute/refresh
-const { data, execute } = await useAsyncData('users',
-  async ({ signal }) => $fetch('/api/users', { signal }),
-  { immediate: false }
-)
+const { data, execute } = await useAsyncData('users', async ({ signal }) => $fetch('/api/users', { signal }), { immediate: false })
 const abortController = new AbortController()
 await execute({ signal: abortController.signal })
 // Later: abortController.abort() to cancel

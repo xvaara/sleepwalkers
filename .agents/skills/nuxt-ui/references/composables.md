@@ -50,17 +50,23 @@ modal.close(returnValue)
 ```vue
 <!-- ConfirmDialog.vue -->
 <script setup>
-const props = defineProps<{ title: string; message: string }>()
+const props = defineProps<{ title: string, message: string }>()
 const emit = defineEmits(['confirm', 'cancel'])
 </script>
 
 <template>
   <UModal :open="true">
-    <template #header>{{ title }}</template>
+    <template #header>
+      {{ title }}
+    </template>
     <p>{{ message }}</p>
     <template #footer>
-      <UButton variant="ghost" @click="emit('cancel')">Cancel</UButton>
-      <UButton color="error" @click="emit('confirm')">Confirm</UButton>
+      <UButton variant="ghost" @click="emit('cancel')">
+        Cancel
+      </UButton>
+      <UButton color="error" @click="emit('confirm')">
+        Confirm
+      </UButton>
     </template>
   </UModal>
 </template>
@@ -222,7 +228,9 @@ const { files, open, reset } = useFileUpload()
   <UFileUpload v-model="files" accept="image/*" @change="handleFiles">
     <template #default="{ dragover }">
       <div :class="{ 'border-primary': dragover }">
-        Drop files here or <UButton @click="open">Browse</UButton>
+        Drop files here or <UButton @click="open">
+          Browse
+        </UButton>
       </div>
     </template>
   </UFileUpload>
@@ -307,7 +315,7 @@ const { error } = useFormField()
     :value="modelValue"
     :class="{ 'border-error': error }"
     @input="emit('update:modelValue', $event.target.value)"
-  />
+  >
   <span v-if="error" class="text-error">{{ error }}</span>
 </template>
 ```

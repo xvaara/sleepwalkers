@@ -236,8 +236,8 @@ export const fetchRepo = defineCachedFunction(
     return await $fetch(`https://api.github.com/repos/${owner}/${repo}`)
   },
   {
-    maxAge: 60 * 5,  // Cache for 5 minutes
-    swr: true,       // Stale-while-revalidate
+    maxAge: 60 * 5, // Cache for 5 minutes
+    swr: true, // Stale-while-revalidate
     name: 'github-repo',
     getKey: (owner, repo) => `${owner}/${repo}`,
   }
@@ -256,8 +256,8 @@ export default defineCachedEventHandler(
     return await fetchProductById(productId)
   },
   {
-    maxAge: 3600,  // Cache for 1 hour
-    swr: true,     // Serve stale while revalidating
+    maxAge: 3600, // Cache for 1 hour
+    swr: true, // Serve stale while revalidating
     getKey: event => getRouterParam(event, 'productId') ?? '',
   }
 )
@@ -269,12 +269,13 @@ Centralize error handling for H3 errors, validation errors, and fallbacks:
 
 ```ts
 // server/utils/error-handler.ts
-import { isError, createError } from 'h3'
+import { createError, isError } from 'h3'
 import * as v from 'valibot'
 
 export function handleApiError(error: unknown, fallback: { statusCode?: number, message: string }): never {
   // Re-throw existing H3 errors
-  if (isError(error)) throw error
+  if (isError(error))
+    throw error
 
   // Handle Valibot validation errors
   if (v.isValiError(error)) {
@@ -293,7 +294,8 @@ export default defineEventHandler(async (event) => {
   try {
     const data = await fetchExternalApi()
     return data
-  } catch (error) {
+  }
+  catch (error) {
     handleApiError(error, { statusCode: 502, message: 'Failed to fetch data' })
   }
 })
