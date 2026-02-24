@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(find:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(pnpm dev:*)",
+      "Bash(curl:*)",
+      "Bash(grep:*)",
+      "Bash(tail:*)",
+      "WebFetch(domain:content.nuxt.com)",
+      "WebFetch(domain:nuxt.studio)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:ig-profile.app.mhx.fi)",
+      "Bash(head:*)"
     ]
   }
 }

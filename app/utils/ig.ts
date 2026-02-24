@@ -26,9 +26,13 @@ export async function getIgData(): Promise<object> {
 function parseIg(data: any): object {
   if (!data || !data.data || !data.data.user || !data.data.user.edge_owner_to_timeline_media || !data.data.user.edge_owner_to_timeline_media.edges)
     return []
+  console.log('Parsing Instagram data', data.data.user.edge_owner_to_timeline_media.edges)
   return data.data.user.edge_owner_to_timeline_media.edges.map((i: any) => ({
-    id: i.node.id,
-    url: `https://www.instagram.com/p/${i.node.shortcode}/`,
+    item: {
+      id: i.node.id,
+      url: `https://www.instagram.com/p/${i.node.shortcode}/`,
+    },
+    node: i.node,
     // image: i.node.thumbnail_src,
     // caption: i.node.edge_media_to_caption.edges[0].node.text,
     // timestamp: i.node.taken_at_timestamp,

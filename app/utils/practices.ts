@@ -7,8 +7,12 @@ function parseHelsinkiDate(dateStr: string, timeStr: string): Date {
   // Determine Helsinki's UTC offset at this approximate point in time
   const fmt = new Intl.DateTimeFormat('en', {
     timeZone: 'Europe/Helsinki',
-    year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
     hour12: false,
   })
   const p = fmt.formatToParts(utc)
@@ -28,7 +32,7 @@ export async function getPracticesData(): Promise<object> {
         date: parseHelsinkiDate(i[1], i[2]),
         location: i[3],
         url: i[4].split('\n')[0].trim(),
-        description: i[4].replace(/\</g, '&lt;').replace(/\>/g, '&gt;').split('\n').slice(1).join('<br>'),
+        description: i[4].replace(/</g, '&lt;').replace(/>/g, '&gt;').split('\n').slice(1).join('<br>'),
       }))
       .sort((a, b) => a.date.getTime() - b.date.getTime())
     return doc

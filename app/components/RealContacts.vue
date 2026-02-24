@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-const { data } = await useAsyncData(`contact`, async () => await queryCollection('data').path('/contact').first())
+const { data } = await useAsyncData(`contact`, async () => await queryCollection('data').where('stem', '=', 'contact').first())
 
 // const data = {}
 </script>

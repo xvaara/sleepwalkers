@@ -1,5 +1,5 @@
-import { getPracticesData } from '../../app/utils/practices'
 import { getIgData } from '../../app/utils/ig'
+import { getPracticesData } from '../../app/utils/practices'
 
 export default eventHandler(async (event) => {
   const params = getQuery(event)

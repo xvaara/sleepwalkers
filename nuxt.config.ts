@@ -1,4 +1,4 @@
-import { readdir, writeFile } from 'node:fs/promises'
+import { readdir, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { getIgData } from './app/utils/ig'
 import { getPracticesData } from './app/utils/practices'
@@ -16,34 +16,57 @@ export default defineNuxtConfig({
       const target = path.join('public', 'images/gallery.json')
       await writeFile(target, JSON.stringify(images, null, 2))
 
+      // try {
+      //   const igPath = path.join('public', 'data', 'ig.json')
+      //   let skipIg = false
+      //   try {
+      //     const igStat = await stat(igPath)
+      //     if (Date.now() - igStat.mtimeMs < 24 * 60 * 60 * 1000) {
+      //       console.log('ig.json is less than 24h old, skipping fetch')
+      //       skipIg = true
+      //     }
+      //   }
+      //   catch {}
+      //   if (!skipIg) {
+      //     console.log('get ig...')
+      //     let ig = null
+      //     for (let attempt = 1; attempt <= 4; attempt++) {
+      //       const timeStart = Date.now()
+      //       ig = await getIgData()
+      //       const timeDiff = Date.now() - timeStart
+      //       console.log(`Attempt ${attempt} took ${timeDiff}ms`)
+      //       if (Array.isArray(ig) && ig.length > 0) {
+      //         console.log(`got ig data on attempt ${attempt}`, ig.length)
+      //         await writeFile(igPath, JSON.stringify(ig, null, 2))
+      //         break
+      //       }
+      //       else {
+      //         console.warn(`Attempt ${attempt} failed to get ig data`, ig)
+      //       }
+      //     }
+      //     if (!Array.isArray(ig) || ig.length === 0)
+      //       console.error('Error getting ig data after 4 attempts', ig)
+      //   }
+      // }
+      // catch (e) {
+      //   console.error('Error getting ig data', e)
+      // }
       try {
-        console.log('get ig...')
-        let ig = null
-        for (let attempt = 1; attempt <= 4; attempt++) {
-          const timeStart = Date.now()
-          ig = await getIgData()
-          const timeEnd = Date.now()
-          const timeDiff = timeEnd - timeStart
-          console.log(`Attempt ${attempt} took ${timeDiff}ms`)
-          if (Array.isArray(ig) && ig.length > 0) {
-            console.log(`got ig data on attempt ${attempt}`, ig.length)
-            await writeFile(path.join('public', 'data', 'ig.json'), JSON.stringify(ig, null, 2))
-            break
-          }
-          else {
-            console.warn(`Attempt ${attempt} failed to get ig data`, ig)
+        const practicesPath = path.join('public', 'data', 'practices.json')
+        let skipPractices = false
+        try {
+          const pStat = await stat(practicesPath)
+          if (Date.now() - pStat.mtimeMs < 24 * 60 * 60 * 1000) {
+            console.log('practices.json is less than 24h old, skipping fetch')
+            skipPractices = true
           }
         }
-        if (!Array.isArray(ig) || ig.length === 0)
-          console.error('Error getting ig data after 4 attempts', ig)
-      }
-      catch (e) {
-        console.error('Error getting ig data', e)
-      }
-      try {
-        console.log('get practices...')
-        const practices = await getPracticesData()
-        await writeFile(path.join('public', 'data', 'practices.json'), JSON.stringify(practices, null, 2))
+        catch {}
+        if (!skipPractices) {
+          console.log('get practices...')
+          const practices = await getPracticesData()
+          await writeFile(practicesPath, JSON.stringify(practices, null, 2))
+        }
       }
       catch (e) {
         console.error('Error getting practices data', e)
@@ -125,12 +148,15 @@ export default defineNuxtConfig({
     locales: ['fi', 'en'], // used in URL path prefix
     defaultLocale: 'fi', // default locale of your project for Nuxt pages and routings
     strategy: 'prefix',
-    vueI18n: './i18n/i18n.config.ts',
+    vueI18n: './i18n.config.ts',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       redirectOn: 'root', // recommended
     },
+    experimental: {
+      localeDetector: 'localeDetector.ts'
+    }
   },
   // routeRules: {
   //   '/': { prerender: false },
@@ -180,8 +206,8 @@ export default defineNuxtConfig({
       owner: 'xvaara',
       repo: 'sleepwalkers',
       branch: 'main',
-      private: false
-    }
+      private: false,
+    },
   },
   compatibilityDate: '2025-04-29',
 })

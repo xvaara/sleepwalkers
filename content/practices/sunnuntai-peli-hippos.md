@@ -1,0 +1,21 @@
+---
+title: Pelivuoro
+end: 20:15
+location: Hipposhalli
+location_en: Hippos Hall
+map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1858.5727528249042!2d25.717588513463408!3d62.23611857605073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4685742145ca8521%3A0xc07f141d10adbea4!2sHipposhalli!5e0!3m2!1sen!2sfi!4v1771797241538!5m2!1sen!2sfi" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+start: 18:45
+title_en: Game session
+weekday: 7
+---
+
+::lang
+klo 18.45 omatoiminen lämppä
+klo 19.00-20.15 lyhyt kiekollinen lämppä ja pelit
+Kaikki mukaan!
+
+#en
+18:45 self-directed warm-up
+19:00–20:15 short warm-up with disc and games
+Everyone welcome!
+::

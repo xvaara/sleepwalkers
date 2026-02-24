@@ -1,203 +1,175 @@
 <template>
-  <div>
-    <!-- Header -->
-    <header class="sticky top-0 z-50 shadow bg-linear-to-l dark:bg-linear-to-r from-brand via-brand-dark to-[#271b1b]">
-      <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-1">
-        <div class="flex items-center gap-2">
-          <!-- Mobile hamburger -->
-          <button class="lg:hidden text-white p-1" aria-label="Menu" @click="mobileOpen = true">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-          </button>
-          <NuxtLink :to="localePath('/')" class="p-0">
-            <img src="/images/sleepwalkers-logo.png" alt="Sleepwalkers" class="h-10">
-          </NuxtLink>
-        </div>
-
-        <!-- Desktop header links -->
-        <div class="hidden lg:flex items-center gap-2 text-white">
-          <NuxtLink
-            :to="computedSwitchLocalePath.to"
-            class="text-white no-underline hover:underline px-2 py-1 text-sm"
-            active-class="font-bold"
-          >
-            {{ computedSwitchLocalePath.label }}
-          </NuxtLink>
-          <a href="https://instagram.com/sleepwalkersultimate" aria-label="Instagram" target="_blank" rel="noopener" class="flex items-center text-white hover:opacity-80 px-1">
+  <div class="page">
+    <!-- TOP BAR -->
+    <div class="top-bar-wrap">
+      <div class="top-bar">
+        <NuxtLink :to="switchLocalePath(otherLocale)" class="lang-toggle" :aria-label="otherLocale === 'en' ? 'English' : 'Suomi'">
+          <UIcon name="i-lucide-languages" class="size-[1.1rem]" aria-hidden />
+        </NuxtLink>
+        <div class="top-social">
+          <a href="https://instagram.com/sleepwalkersultimate" target="_blank" rel="noopener" aria-label="Instagram">
             <UIcon name="i-lucide-instagram" class="size-[1.1rem]" aria-hidden />
           </a>
-          <a href="https://www.facebook.com/sleepwalkersultimate" aria-label="Facebook" target="_blank" rel="noopener" class="flex items-center text-white hover:opacity-80 px-1">
+          <a href="https://facebook.com/sleepwalkersultimate" target="_blank" rel="noopener" aria-label="Facebook">
             <UIcon name="i-lucide-facebook" class="size-[1.1rem]" aria-hidden />
           </a>
-          <div class="border-l border-white/30 h-5 mx-1" />
-          <UColorModeButton />
         </div>
       </div>
-    </header>
-
-    <!-- Mobile Slideover -->
-    <USlideover v-model:open="mobileOpen" side="left" title="Menu">
-      <template #body>
-        <nav class="mb-4">
-          <ul class="space-y-1">
-            <li v-for="link in navigationComputed" :key="link.route">
-              <NuxtLink
-                :to="link.route"
-                class="block px-3 py-2 rounded no-underline text-inherit hover:bg-gray-100 dark:hover:bg-gray-800"
-                active-class="font-bold"
-                @click="mobileOpen = false"
-              >
-                {{ link.label }}
-              </NuxtLink>
-            </li>
-          </ul>
-        </nav>
-
-        <!-- Mobile social links + theme -->
-        <div class="flex items-center gap-2 px-3 mb-4">
-          <NuxtLink
-            :to="computedSwitchLocalePath.to"
-            class="text-sm no-underline text-inherit hover:underline"
-            @click="mobileOpen = false"
-          >
-            {{ computedSwitchLocalePath.label }}
-          </NuxtLink>
-          <a href="https://instagram.com/sleepwalkersultimate" aria-label="Instagram" target="_blank" rel="noopener" class="text-inherit hover:opacity-80 px-1">
-            <UIcon name="i-lucide-instagram" class="size-[1.1rem]" aria-hidden />
-          </a>
-          <a href="https://www.facebook.com/sleepwalkersultimate" aria-label="Facebook" target="_blank" rel="noopener" class="text-inherit hover:opacity-80 px-1">
-            <UIcon name="i-lucide-facebook" class="size-[1.1rem]" aria-hidden />
-          </a>
-          <div class="border-l border-gray-300 dark:border-gray-600 h-5 mx-1" />
-          <UColorModeButton />
-        </div>
-
-        <Practices small />
-      </template>
-    </USlideover>
-
-    <!-- Main layout with sidebar -->
-    <div class="max-w-7xl mx-auto px-4 lg:grid lg:grid-cols-[15rem_1fr] lg:gap-6">
-      <!-- Desktop sidebar -->
-      <aside class="hidden lg:block sticky top-12 h-[calc(100vh-3rem)] overflow-y-auto py-4">
-        <nav class="mb-3">
-          <ul class="shadow rounded space-y-1 py-2">
-            <li v-for="link in navigationComputed" :key="link.route">
-              <NuxtLink
-                :to="link.route"
-                class="block px-3 py-1.5 no-underline text-inherit hover:bg-gray-100 dark:hover:bg-gray-800"
-                active-class="font-bold"
-              >
-                {{ link.label }}
-              </NuxtLink>
-            </li>
-          </ul>
-        </nav>
-        <Practices small />
-      </aside>
-
-      <!-- Main content -->
-      <main class="py-4">
-        <slot />
-      </main>
     </div>
 
-    <footer>
-      <ul class="hidden">
-        <li
-          v-for="link in navigationComputed"
-          :key="link.route"
-        >
-          <NuxtLink
-            :to="link.route"
-            class="no-underline text-inherit"
-            active-class="font-bold"
-          >
-            {{ link.label }}
-          </NuxtLink>
-        </li>
-      </ul>
+    <slot />
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <img src="/images/sleepwalkers-logo.png" alt="Sleepwalkers" class="footer-logo">
+      <span class="footer-copy">&copy; Sleepwalkers ry &middot; Jyv&auml;skyl&auml;</span>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-
 const { locale } = useI18n()
-const otherLocale = computed(() => (locale.value === 'fi' ? 'en' : 'fi'))
-const mobileOpen = ref(false)
-
-const { data: blogPosts } = await useAsyncData(() => `home-blogposts-${locale.value}`, () =>
-  queryCollection('blog')
-    .where('path', 'LIKE', `/${locale.value}/blog%`)
-    .andWhere(query => query.where('published', '=', true))
-    .order('date', 'DESC')
-    .limit(4).all())
-
-const { data: navigation } = await useAsyncData(() => `navigation-${locale.value}`, () => queryCollectionNavigation('content').where('path', 'LIKE', `/${locale.value}/%`))
-const { data: navigationOtherLocale } = await useAsyncData(() => `navigationOtherLocale-${locale.value}`, () => queryCollectionNavigation('content').where('path', 'LIKE', `/${otherLocale.value}/%`))
-
-const navigationComputed = computed(() => {
-  if (!navigation.value?.[0].children)
-    return []
-  return navigation.value[0].children
-    .map(i => ({
-      label: i.title,
-      route: i.path,
-    }))
-})
-
-const { data: otherBlogPosts } = await useAsyncData(() => `all-blogposts-${otherLocale.value}`, () =>
-  queryCollection('blog')
-    .where('path', 'LIKE', `/${otherLocale.value}/blog%`)
-    .andWhere(query => query.where('published', '=', true))
-    .all())
-
-function hasLocaleSwitch(link: string) {
-  if (navigationOtherLocale.value?.[0]?.path === link)
-    return true
-  if (navigationOtherLocale.value?.[0]?.children?.some(i => i.path === link))
-    return true
-  if (link === `/${otherLocale.value}/blog`)
-    return true
-  if (link.includes('/blog')) {
-    if (otherBlogPosts.value?.some(i => i.path === link))
-      return true
-  }
-  return false
-}
-
-const route = useNuxtApp().$router.currentRoute
-const computedSwitchLocalePath = computed(() => {
-  let link = route.value.path
-  link = link.replace(new RegExp(`^/${locale.value}`), `/${otherLocale.value}`)
-
-  while (!hasLocaleSwitch(link) && link.includes('/') && link !== '/')
-    link = link.replace(/\/[^/]*$/, '')
-  return {
-    to: link,
-    label: locale.value === 'fi' ? 'English' : 'Suomi',
-  }
-})
-
-function localePath(path: string) {
-  return `/${locale.value}${path.startsWith('/') ? path : `/${path}`}`
-}
-
-// Theme / color mode
-const colorMode = useColorMode()
-
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set(_isDark) {
-    colorMode.preference = _isDark ? 'dark' : 'light'
-  }
-})
+const switchLocalePath = useSwitchLocalePath()
+const otherLocale = computed(() => locale.value === 'fi' ? 'en' : 'fi')
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap');
+
 svg {
   display: inline;
+}
+</style>
+
+<style scoped>
+.page {
+  --bg: #151515;
+  --bg2: #1b1b1b;
+  --text: #ededed;
+  --dim: rgba(237, 237, 237, 0.58);
+  --accent: #db3931;
+  --accent-soft: rgba(219, 57, 49, 0.08);
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- TOP BAR --- */
+
+.top-bar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+  margin-bottom: -3.5rem;
+}
+
+.top-bar {
+  pointer-events: auto;
+  margin: 1rem 1.5rem 0 0;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+}
+
+.lang-toggle:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.top-social {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.top-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s, background 0.2s;
+}
+
+.top-social a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.top-social svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- FOOTER --- */
+
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem 6rem;
+}
+
+.footer-logo {
+  /* height: 18px;
+  opacity: 0.3;
+  filter: brightness(10); */
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    margin: 0.6rem 0.75rem 0 0;
+    gap: 0.2rem;
+    padding: 0.25rem 0.35rem;
+  }
+
+  .lang-toggle,
+  .top-social a {
+    width: 26px;
+    height: 26px;
+  }
+
+  .top-social {
+    gap: 0;
+  }
+
+  .page-footer {
+    padding: 2rem 2rem 6rem;
+  }
 }
 </style>

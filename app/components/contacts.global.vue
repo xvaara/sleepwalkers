@@ -1,9 +1,7 @@
 <template>
-  
-    <RealContacts>
-      <slot />
-    </RealContacts>
-  
+  <RealContacts>
+    <slot />
+  </RealContacts>
 </template>
 
 <script setup>

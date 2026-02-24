@@ -8,5 +8,6 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({ layout: 'blog' })
 const search = ref('')
 </script>

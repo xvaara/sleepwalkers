@@ -37,6 +37,8 @@
 <script setup lang="ts">
 import type { BlogPost } from '~/types/blog'
 
+definePageMeta({ layout: 'blog' })
+
 const localePath = useLocalePath()
 const { path } = useRoute()
 const { locale } = useI18n()
