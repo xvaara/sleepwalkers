@@ -21,8 +21,34 @@
     <div class="content-sections">
       <!-- HIGHLIGHTS -->
       <section v-if="highlights" class="cs highlights">
-        <span class="tag">{{ t('Kohokohdat') }}</span>
+        <span class="tag">{{ t('Ajankohtaista') }}</span>
         <ContentRenderer :value="highlights" />
+      </section>
+      <!-- NEXT TRAININGS -->
+      <section v-if="upcomingPractices.length" class="cs next-trainings">
+        <div class="next-trainings-inner">
+          <span class="tag">{{ t('Seuraavat treenit') }}</span>
+          <div class="next-list">
+            <a
+              v-for="(p, i) in upcomingPractices"
+              :key="i"
+              :href="p.url"
+              target="_blank"
+              rel="noopener"
+              class="next-item"
+            >
+              <div class="next-date-block">
+                <span class="next-date-day">{{ p.dateFormatted }}</span>
+                <span class="next-date-weekday">{{ p.dayName }}</span>
+              </div>
+              <div class="next-info">
+                <span class="next-title">{{ p.title }}</span>
+                <span class="next-loc">{{ p.location }}</span>
+              </div>
+              <span class="next-arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- INSTAGRAM FEED -->
@@ -73,32 +99,6 @@
         </div>
       </section>
 
-      <!-- NEXT TRAININGS -->
-      <section v-if="upcomingPractices.length" class="cs next-trainings">
-        <div class="next-trainings-inner">
-          <span class="tag">{{ t('Seuraavat treenit') }}</span>
-          <div class="next-list">
-            <a
-              v-for="(p, i) in upcomingPractices"
-              :key="i"
-              :href="p.url"
-              target="_blank"
-              rel="noopener"
-              class="next-item"
-            >
-              <div class="next-date-block">
-                <span class="next-date-day">{{ p.dateFormatted }}</span>
-                <span class="next-date-weekday">{{ p.dayName }}</span>
-              </div>
-              <div class="next-info">
-                <span class="next-title">{{ p.title }}</span>
-                <span class="next-loc">{{ p.location }}</span>
-              </div>
-              <span class="next-arrow">&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </section>
 
       <!-- ABOUT SPLIT (text left, image right) -->
       <section v-if="about" class="cs split">
