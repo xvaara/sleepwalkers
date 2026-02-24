@@ -373,8 +373,7 @@ function onIgScroll(e: Event) {
 }
 
 // Calendar data from practices.json
-const { data: calendarPractices } = await useFetch<CalendarPractice[]>('/data/practices.json', {
-  key: 'calendar-practices',
+const { data: calendarPractices } = await useFetch<CalendarPractice[]>('/api/practices', {
   default: () => [],
 })
 
