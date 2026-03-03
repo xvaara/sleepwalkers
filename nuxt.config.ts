@@ -217,21 +217,32 @@ export default defineNuxtConfig({
       private: false,
     },
   },
-  hub: {
-    // D1 database
-    // db: 'sqlite',
-    // db: {
-    //   dialect: 'sqlite',
-    //   driver: 'd1',
-    //   connection: { databaseId: 'dbe26d89-1ad7-4f28-862f-cf13ec4f2cec' }
-    // },
-    // KV namespace (binding defaults to 'KV')
-    kv: true,
-    // kv: {
-    //   driver: 'cloudflare-kv-binding',
-    //   namespaceId: 'a617f48fa10c45b48f96fcf40daceb42',
-    //   binding: 'KV'
-    // },
+  $development: {
+    hub: {
+      // D1 database
+      // db: 'sqlite',
+      // db: {
+      //   dialect: 'sqlite',
+      //   driver: 'd1',
+      //   connection: { databaseId: 'dbe26d89-1ad7-4f28-862f-cf13ec4f2cec' }
+      // },
+      // KV namespace (binding defaults to 'KV')
+      kv: true,
+      // kv: {
+      //   driver: 'cloudflare-kv-binding',
+      //   namespaceId: 'a617f48fa10c45b48f96fcf40daceb42',
+      //   binding: 'KV'
+      // },
+    },
+  },
+  $production: {
+    hub: {
+      kv: {
+        driver: 'cloudflare-kv-binding',
+        namespaceId: 'a617f48fa10c45b48f96fcf40daceb42',
+        binding: 'KV'
+      },
+    }
   },
   compatibilityDate: '2026-01-01',
 })
