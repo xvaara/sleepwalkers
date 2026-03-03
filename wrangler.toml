@@ -1,0 +1,10 @@
+name = "sleepwalkers"
+compatibility_date = "2026-01-01"
+
+kv_namespaces = [
+  { binding = "KV", id = "a617f48fa10c45b48f96fcf40daceb42" }
+]
+
+d1_databases = [
+  { binding = "DB", database_name = "default", database_id = "default" }
+]

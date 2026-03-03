@@ -19,11 +19,6 @@
 
     <!-- CONTENT SECTIONS (auto-alternating backgrounds) -->
     <div class="content-sections">
-      <!-- HIGHLIGHTS -->
-      <section v-if="highlights" class="cs highlights">
-        <span class="tag">{{ t('Ajankohtaista') }}</span>
-        <ContentRenderer :value="highlights" />
-      </section>
       <!-- NEXT TRAININGS -->
       <section v-if="upcomingPractices.length" class="cs next-trainings">
         <div class="next-trainings-inner">
@@ -49,6 +44,11 @@
             </a>
           </div>
         </div>
+      </section>
+      <!-- HIGHLIGHTS -->
+      <section v-if="highlights" class="cs highlights">
+        <span class="tag">{{ t('Ajankohtaista') }}</span>
+        <ContentRenderer :value="highlights" />
       </section>
 
       <!-- INSTAGRAM FEED -->

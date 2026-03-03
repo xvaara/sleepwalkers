@@ -51,26 +51,26 @@ export default defineNuxtConfig({
       // catch (e) {
       //   console.error('Error getting ig data', e)
       // }
-      try {
-        const practicesPath = path.join('public', 'data', 'practices.json')
-        let skipPractices = false
-        try {
-          const pStat = await stat(practicesPath)
-          if (Date.now() - pStat.mtimeMs < 24 * 60 * 60 * 1000) {
-            console.log('practices.json is less than 24h old, skipping fetch')
-            skipPractices = true
-          }
-        }
-        catch {}
-        if (!skipPractices) {
-          console.log('get practices...')
-          const practices = await getPracticesData()
-          await writeFile(practicesPath, JSON.stringify(practices, null, 2))
-        }
-      }
-      catch (e) {
-        console.error('Error getting practices data', e)
-      }
+      // try {
+      //   const practicesPath = path.join('public', 'data', 'practices.json')
+      //   let skipPractices = false
+      //   try {
+      //     const pStat = await stat(practicesPath)
+      //     if (Date.now() - pStat.mtimeMs < 24 * 60 * 60 * 1000) {
+      //       console.log('practices.json is less than 24h old, skipping fetch')
+      //       skipPractices = true
+      //     }
+      //   }
+      //   catch {}
+      //   if (!skipPractices) {
+      //     console.log('get practices...')
+      //     const practices = await getPracticesData()
+      //     await writeFile(practicesPath, JSON.stringify(practices, null, 2))
+      //   }
+      // }
+      // catch (e) {
+      //   console.error('Error getting practices data', e)
+      // }
     },
   },
   app: {
@@ -104,12 +104,13 @@ export default defineNuxtConfig({
     strict: true,
   },
   nitro: {
-    preset: 'cloudflare_pages',
+    preset: "cloudflare_pages",
     prerender: {
       autoSubfolderIndex: false,
       crawlLinks: true,
       routes: ['/', '/sitemap.xml', '/robots.txt'],
     },
+
     publicAssets: [
       {
         baseURL: 'images',
@@ -128,6 +129,22 @@ export default defineNuxtConfig({
       },
 
     ],
+
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
+      wrangler: {
+        vars: {
+          MY_VARIABLE: "my-value"
+        },
+        kv_namespaces: [
+          {
+            binding: "KV",
+            id: "a617f48fa10c45b48f96fcf40daceb42"
+          }
+        ]
+      }
+    }
   },
   devtools: { enabled: false },
   modules: [
@@ -139,6 +156,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-studio',
     '@nuxt/ui',
+    'nitro-cloudflare-dev',
   ],
   css: ['~/assets/css/main.css'],
   colorMode: {
@@ -209,5 +227,5 @@ export default defineNuxtConfig({
       private: false,
     },
   },
-  compatibilityDate: '2025-04-29',
+  compatibilityDate: '2026-01-01',
 })
