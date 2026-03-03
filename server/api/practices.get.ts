@@ -1,10 +1,15 @@
 import { getPracticesData } from "~/utils/practices"
+import { kv } from '@nuxthub/kv'
+
+interface Practices {
+  fetched: number
+  data: object
+}
 
 
 export default defineEventHandler(async (event) => {
-  const { cloudflare } = event.context
-  const practices = await cloudflare.env.KV.get('practices', 'json')
-  console.log('practices data from KV:', practices)
+  const practices = await kv.get<Practices>('practices')
+  // console.log('practices data from KV:', practices)
   if (practices) {
     if (Array.isArray(practices.data) && practices.data.length > 0 && Date.now() - practices.fetched < 24 * 60 * 60 * 1000) {
       return practices.data
@@ -14,7 +19,7 @@ export default defineEventHandler(async (event) => {
   }
   try {
     const data = await getPracticesData()
-    await cloudflare.env.KV.put('practices', JSON.stringify({ data, fetched: Date.now() }), { expirationTtl: 24 * 60 * 60 })
+    await kv.set('practices', { data, fetched: Date.now() }, { ttl: 24 * 60 * 60 })
     return data
   }
   catch (e) {

@@ -22,6 +22,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^7.4.3",
     "@nuxt/content": "3.11.2",
+    "@nuxthub/core": "^0.10.6",
     "@nuxtjs/i18n": "^10.2.3",
     "@nuxtjs/robots": "^5.7.0",
     "@nuxtjs/sitemap": "^7.6.0",

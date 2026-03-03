@@ -104,7 +104,7 @@ export default defineNuxtConfig({
     strict: true,
   },
   nitro: {
-    preset: "cloudflare_pages",
+    // preset: "cloudflare_module",
     prerender: {
       autoSubfolderIndex: false,
       crawlLinks: true,
@@ -146,6 +146,7 @@ export default defineNuxtConfig({
     'nuxt-studio',
     '@nuxt/ui',
     'nitro-cloudflare-dev',
+    '@nuxthub/core',
   ],
   css: ['~/assets/css/main.css'],
   colorMode: {
@@ -215,6 +216,22 @@ export default defineNuxtConfig({
       branch: 'main',
       private: false,
     },
+  },
+  hub: {
+    // D1 database
+    // db: 'sqlite',
+    // db: {
+    //   dialect: 'sqlite',
+    //   driver: 'd1',
+    //   connection: { databaseId: 'dbe26d89-1ad7-4f28-862f-cf13ec4f2cec' }
+    // },
+    // KV namespace (binding defaults to 'KV')
+    kv: true,
+    // kv: {
+    //   driver: 'cloudflare-kv-binding',
+    //   namespaceId: 'a617f48fa10c45b48f96fcf40daceb42',
+    //   binding: 'KV'
+    // },
   },
   compatibilityDate: '2026-01-01',
 })

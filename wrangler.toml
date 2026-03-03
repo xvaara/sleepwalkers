@@ -1,7 +1,0 @@
-name = "sleepwalkers"
-compatibility_date = "2026-01-01"
-compatibility_flags = ["nodejs_compat", "no_nodejs_compat_v2"]
-
-kv_namespaces = [
-  { binding = "KV", id = "a617f48fa10c45b48f96fcf40daceb42" }
-]
