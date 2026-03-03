@@ -133,17 +133,6 @@ export default defineNuxtConfig({
     cloudflare: {
       deployConfig: true,
       nodeCompat: true,
-      wrangler: {
-        vars: {
-          MY_VARIABLE: "my-value"
-        },
-        kv_namespaces: [
-          {
-            binding: "KV",
-            id: "a617f48fa10c45b48f96fcf40daceb42"
-          }
-        ]
-      }
     }
   },
   devtools: { enabled: false },
