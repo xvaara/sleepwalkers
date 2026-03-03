@@ -8,11 +8,12 @@ Sleepwalkers ultimate frisbee club website (sleepwalkers.fi) — a Finnish sport
 
 ## Commands
 
-- **Dev server:** `pnpm dev`
-- **Build:** `pnpm build` (uses Cloudflare Pages preset)
-- **Generate static:** `pnpm generate`
-- **Preview:** `pnpm preview`
-- **Lint:** `pnpm lint` / `pnpm lint:fix`
+- **Dev server:** `bun dev`
+- **Build:** `bun run build` (uses Cloudflare Pages preset)
+- **Generate static:** `bun run generate`
+- **Preview:** `bun run preview` (builds + wrangler dev)
+- **Deploy:** `bun run deploy` (builds + wrangler deploy)
+- **Lint:** `bun lint` / `bun lint:fix`
 
 ## Tech Stack
 
@@ -24,7 +25,7 @@ Sleepwalkers ultimate frisbee club website (sleepwalkers.fi) — a Finnish sport
 - **SEO:** `@nuxtjs/robots`, `@nuxtjs/sitemap`
 - **Images:** `@nuxt/image`
 - **Linting:** `@antfu/eslint-config`
-- **Package manager:** pnpm
+- **Package manager:** bun
 
 ## Architecture
 
