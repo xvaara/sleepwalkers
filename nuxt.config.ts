@@ -88,7 +88,7 @@ export default defineNuxtConfig({
   sitemap: {
     // strictNuxtContentPaths: true,
     exclude: ['/blog-arkisto/**'],
-    include: ['/**'],
+    include: ['/', '/fi', '/en'],
   },
   site: {
     url: 'https://sleepwalkers.fi',
@@ -107,8 +107,8 @@ export default defineNuxtConfig({
     // preset: "cloudflare_module",
     prerender: {
       autoSubfolderIndex: false,
-      crawlLinks: true,
-      routes: ['/', '/sitemap.xml', '/robots.txt'],
+      // crawlLinks: true,
+      routes: ['/', '/sitemap.xml', '/robots.txt', '/fi', '/en'],
     },
 
     publicAssets: [
