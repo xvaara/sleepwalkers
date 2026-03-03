@@ -221,11 +221,6 @@ export default defineNuxtConfig({
     hub: {
       // D1 database
       // db: 'sqlite',
-      // db: {
-      //   dialect: 'sqlite',
-      //   driver: 'd1',
-      //   connection: { databaseId: 'dbe26d89-1ad7-4f28-862f-cf13ec4f2cec' }
-      // },
       // KV namespace (binding defaults to 'KV')
       kv: true,
       // kv: {
@@ -237,10 +232,14 @@ export default defineNuxtConfig({
   },
   $production: {
     hub: {
+      db: {
+        dialect: 'sqlite',
+        driver: 'd1',
+        connection: { databaseId: 'dbe26d89-1ad7-4f28-862f-cf13ec4f2cec' }
+      },
       kv: {
         driver: 'cloudflare-kv-binding',
         namespaceId: 'a617f48fa10c45b48f96fcf40daceb42',
-        binding: 'KV'
       },
     }
   },
