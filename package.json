@@ -38,6 +38,7 @@
     "eslint": "^10.7.0",
     "nuxt": "^4.4.8",
     "nuxt-studio": "1.7.0",
+    "rolldown": "^1.1.5",
     "wrangler": "^4.110.0"
   }
 }
