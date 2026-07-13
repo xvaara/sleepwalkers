@@ -1,5 +1,6 @@
 ---
 title: Kohokohdat
+hide: true
 ---
 
 ::home-card
