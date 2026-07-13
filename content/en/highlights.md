@@ -1,5 +1,6 @@
 ---
 title: Highlights
+hide: true
 ---
 
 ::home-card

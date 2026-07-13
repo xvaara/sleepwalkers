@@ -48,7 +48,6 @@
       <!-- HIGHLIGHTS -->
       <section v-if="highlights && !highlights.meta.hide" class="cs highlights">
         <span class="tag">{{ t('Ajankohtaista') }}</span>
-        {{ highlights }}
         <ContentRenderer :value="highlights" />
       </section>
 
