@@ -1,6 +1,10 @@
 {
   "type": "module",
   "private": true,
+  "packageManager": "npm@11.16.0",
+  "engines": {
+    "node": ">=24.11.0"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
