@@ -1,4 +1,5 @@
- "Kaikille avoin vuoro"
+---
+title: "Kaikille avoin vuoro"
 title_en: "Beginner friendly training"
 location: "Vehkalammen kenttä"
 location_en: "Vehkalampi field"
