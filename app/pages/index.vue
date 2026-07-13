@@ -3,7 +3,7 @@
     <!-- 1. HERO -->
     <section class="hero">
       <div class="hero-bg-wrap">
-        <img src="/images/sleepwalkers.png" alt="" class="hero-bg">
+        <img src="/images/sleepwalkers.svg" alt="" class="hero-bg">
       </div>
       <div class="hero-overlay" />
     </section>
@@ -12,7 +12,7 @@
     <section class="gallery-strip">
       <div ref="stripTrackRef" class="strip-track">
         <div v-for="n in 12" :key="n" class="strip-frame">
-          <img :src="`/images/gallery/${((n - 1) % 6) + 1}.jpg`" :alt="`Gallery ${n}`">
+          <img :src="`/images/gallery/${((n - 1) % 11) + 1}.jpg`" :alt="`Gallery ${n}`">
         </div>
       </div>
     </section>
